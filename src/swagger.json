@@ -14,8 +14,8 @@
             "description": "Local Server"
         },
         {
-            "url": "https://breakingnews.herokuapp.com",
-            "description": "Heroku"
+            "url": "https://api-for-you-entregas.onrender.com",
+            "description": "render"
         }
     ],
     "paths": {
