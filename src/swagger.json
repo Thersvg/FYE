@@ -1,0 +1,936 @@
+{
+    "openapi": "3.0.0",
+    "info": {
+        "title": "For you API Documentation",
+        "description": "In this documentation you will be able to consult the API end-point and also test all available routes. Do not forget to register and carry out the authorization.",
+        "contact": {
+            "email": "rodrigohend@outlook.com"
+        },
+        "version": "1.0.0" 
+    },
+    "servers": [
+        {
+            "url": "http://localhost:3000",
+            "description": "Local Server"
+        },
+        {
+            "url": "https://breakingnews.herokuapp.com",
+            "description": "Heroku"
+        }
+    ],
+    "paths": {
+        "/user/": {
+            "post":{
+                "summary": "Create a new user",
+                "description":"Route responsible for creating a new user",
+                "tags": ["Users"],
+                "requestBody":{
+                    "content":{
+                        "application/json":{
+                            "schema":{
+                                "$ref": "#/components/schemas/User"
+                            },
+                            "example":{
+                                "Users":{
+                                    "value":{
+                                        "name_entregador": "admin123",
+                                        "cpf_entregador": "88888888",
+                                        "password_entregador": "123",
+                                        "email_entregador": "admin123@gmail.com",
+                                        "formaDepagamento_entregador": "12chavepix3"
+                                    }
+                                }
+                            }
+                        }
+                    }
+                },
+                "responses":{
+                    "400":{
+                        "description":"Not Created"
+                    },
+                    "201":{
+                        "description":"Created",
+                        "content":{
+                            "application/json":{
+                                "schema":{
+                                    "type":"object",
+                                    "$ref":"#/components/schemas/User"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/user": {
+            "get":{
+                "summary":"Search all users",
+                "description":"Route responsible for fetching all users",
+                "tags":  ["Users"],
+                "responses":{
+                    "400":{
+                        "description": "Not Found"
+                    },
+                    "200":{
+                        "description": "OK",
+                        "content":{
+                            "application/json":{
+                                "schema":{
+                                    "type":"array",
+                                    "items":{
+                                        "#ref":"#/components/schemas/User"
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/user/{id}": {
+            "get":{
+                "summary": "Search user by id",
+                "description":"Route responsible for searching for user by id",
+                "tags": ["Users"],
+                "parameters":[
+                    {
+                        "in": "path",
+                        "name": "id",
+                        "type": "string",
+                        "description":"User ID",
+                        "require": true
+                    }
+                ],
+                "responses":{
+                    "400":{
+                        "description":"Not Found"
+                    },
+                    "200":{
+                        "description":"OK",
+                        "content":{
+                            "application/json":{
+                                "schema":{
+                                    "type":"object",
+                                    "$ref":"#/components/schemas/User"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/user/{id}": {
+          "patch":{
+            "summary":"Update user by id",
+            "description":"Route responsible for editing the user by id",
+            "tags": ["Users"],
+            "parameters": [
+                {
+                    "in": "path",
+                    "name": "id",
+                    "type": "string",
+                    "description":"User ID",
+                    "require": true
+                }
+            ],
+            "requestBody":{
+                "content":{
+                    "application/json":{
+                        "schema":{
+                            "$ref":"#/components/schemas/User"
+                        },
+                        "example":{
+                            "name_entregador":"admin"
+                        }
+                    }
+                }
+            },
+            "responses":{
+                "400":{
+                    "description": "Not Found"
+                },
+                "200":{
+                    "description": "OK",
+                    "content":{
+                        "application/json":{
+                            "schema":{
+                                "type": "string",
+                                "$ref":"#/components/schemas/User"
+                            }
+                        }
+                    }
+                }
+            }
+          }  
+        },
+
+
+        "/pedidos-aceitos/{id}":{
+            "post":{
+                "summary": "Create a new order",
+                "description":"Route responsible for creating a new order",
+                "tags": ["PedidoAceito"],
+                "security": [{ "bearerAuth": [] }],
+                "parameters":[
+                    {
+                        "in": "path",
+                        "name": "id",
+                        "description": "ID used to create the object",
+                        "required": true,
+                        "type": "integer"
+                    }
+                ],
+                "responses":{
+                    "400":{
+                        "description": "Not Created"
+                    },
+                    "200":{
+                        "description": "Created",
+                        "schema":{
+                        "$ref":"#/components/schemas/PedidoAceito"
+                        }
+                    }
+                }
+            }
+        },
+
+        "/pedidos-aceitos/":{
+            "get":{
+                "summary":"Search all orders acepts",
+                "description":"Route responsible for fetching all orders acepts",
+                "tags":  ["PedidoAceito"],
+                "responses":{
+                    "400":{
+                        "description": "Not Found"
+                    },
+                    "200":{
+                        "description": "OK",
+                        "content":{
+                            "application/json":{
+                                "schema":{
+                                    "type":"array",
+                                    "items":{
+                                        "#ref":"#/components/schemas/PedidoAceito"
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/pedidos-aceitos-pegar/{id}":{
+            "get":{
+                "summary": "Search order by id",
+                "description":"Route responsible for searching for order by id",
+                "tags": ["PedidoAceito"],
+                "parameters":[
+                    {
+                        "in": "path",
+                        "name": "id",
+                        "type": "string",
+                        "description":"User ID",
+                        "require": true
+                    }
+                ],
+                "responses":{
+                    "400":{
+                        "description":"Not Found"
+                    },
+                    "200":{
+                        "description":"OK",
+                        "content":{
+                            "application/json":{
+                                "schema":{
+                                    "type":"object",
+                                    "$ref":"#/components/schemas/PedidoAceito"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        
+
+        "/pedidos-aceitos-empresa{id}":{
+            "post":{
+                "summary": "Create a new order",
+                "description":"Route responsible for creating a new order",
+                "tags": ["PedidoAceitoEmpresa"],
+                "security": [{ "bearerAuth": [] }],
+                "parameters":[
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "ID used to create the object",
+                        "required": true,
+                        "type": "integer"
+                    }
+                ],
+                "responses":{
+                    "400":{
+                        "description": "Not Created"
+                    },
+                    "200":{
+                        "description": "Created",
+                        "schema":{
+                        "$ref":"#/components/schemas/PedidoAceito"
+                        }
+                    }
+                }
+            }
+        },
+
+        "/pedidos-aceitos-empresa/":{
+            "get":{
+                "summary":"Search all orders acepts",
+                "description":"Route responsible for fetching all orders acepts",
+                "tags":  ["PedidoAceitoEmpresa"],
+                "responses":{
+                    "400":{
+                        "description": "Not Found"
+                    },
+                    "200":{
+                        "description": "OK",
+                        "content":{
+                            "application/json":{
+                                "schema":{
+                                    "type":"array",
+                                    "items":{
+                                        "#ref":"#/components/schemas/PedidoAceito"
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/pedidos-aceitos-empresa/{id}":{
+            "get":{
+                "summary": "Search order by id",
+                "description":"Route responsible for searching for order by id",
+                "tags": ["PedidoAceitoEmpresa"],
+                "parameters":[
+                    {
+                        "in": "path",
+                        "name": "id",
+                        "type": "string",
+                        "description":"User ID",
+                        "require": true
+                    }
+                ],
+                "responses":{
+                    "400":{
+                        "description":"Not Found"
+                    },
+                    "200":{
+                        "description":"OK",
+                        "content":{
+                            "application/json":{
+                                "schema":{
+                                    "type":"object",
+                                    "$ref":"#/components/schemas/PedidoAceito"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+
+
+        "/historico-pedido/{id}":{
+            "post":{
+                "summary": "Create a new order",
+                "description":"Route responsible for creating a new order in historic",
+                "tags": ["HistoricoPedido"],
+                "parameters":[
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "ID used to create the object",
+                        "required": true,
+                        "type": "integer"
+                    }
+                ],
+                "responses":{
+                    "400":{
+                        "description": "Not Created"
+                    },
+                    "200":{
+                        "description": "Created",
+                        "schema":{
+                        "$ref":"#/components/schemas/HistoricoPedidos"
+                        }
+                    }
+                }
+            }
+        },
+        "/historico-pedido/empresa/{id}":{
+            "get":{
+                "summary": "Search all historic orders interprise",
+                "description":"Route responsible for searching orders in historic of the inteprise",
+                "tags": ["HistoricoPedido"],
+                "parameters":[
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "ID used to create the object",
+                        "required": true,
+                        "type": "integer"
+                    }
+                ],
+                "responses":{
+                    "400":{
+                        "description": "Not Found"
+                    },
+                    "200":{
+                        "description": "Ok",
+                        "schema":{
+                        "$ref":"#/components/schemas/HistoricoPedidos"
+                        }
+                    }
+                }
+            }
+        },
+        "/historico-pedido/entregador/{id}":{
+            "get":{
+                "summary": "Search all historic orders of the deliveryman",
+                "description":"Route responsible for searching orders in historic of the deliveryman",
+                "tags": ["HistoricoPedido"],
+                "parameters":[
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "ID used to create the object",
+                        "required": true,
+                        "type": "integer"
+                    }
+                ],
+                "responses":{
+                    "400":{
+                        "description": "Not Found"
+                    },
+                    "200":{
+                        "description": "Ok",
+                        "schema":{
+                        "$ref":"#/components/schemas/HistoricoPedidos"
+                        }
+                    }
+                }
+            }
+        },
+
+        "/pedido":{
+            "post":{
+                "summary": "Create a new order",
+                "description":"Route responsible for creating a new order",
+                "tags": ["Pedidos"],
+                "security": [{ "bearerAuth": [] }],
+                "requestBody":{
+                    "content":{
+                        "application/json":{
+                            "schema":{
+                                "$ref": "#/components/schemas/Pedido"
+                            },
+                            "example":{
+                                "codigo_pedido":"HTTYR4",
+                                "name_cliente":"joao silva",
+                                "valor_pedido":"28,54",
+                                "endereco_cliente":"rua 123",
+                                "telefone_cliente":"9999999999",
+                                "descricao_pedido":"2x pizzas",
+                                "forma_pagamento":"pix",
+                                "taxa_entrega":"6"
+                                    
+                            }
+                            
+                        }
+                    }
+                },
+                "responses":{
+                    "400":{
+                        "description":"Not Created"
+                    },
+                    "201":{
+                        "description":"Created",
+                        "content":{
+                            "application/json":{
+                                "schema":{
+                                    "type":"object",
+                                    "$ref":"#/components/schemas/Pedido"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/pedido/":{
+            "get":{
+                "summary":"Search all orders",
+                "description":"Route responsible for fetching all orders",
+                "tags":  ["Pedidos"],
+                "responses":{
+                    "400":{
+                        "description": "Not Found"
+                    },
+                    "200":{
+                        "description": "OK",
+                        "content":{
+                            "application/json":{
+                                "schema":{
+                                    "type":"array",
+                                    "items":{
+                                        "#ref":"#/components/schemas/Pedido"
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/pedido/{id}":{
+            "delete":{
+                "summary": "Delete a order",
+                "description":"Route responsible for Delete a order",
+                "tags": ["Pedido"],
+                "parameters":[
+                    {
+                        "in": "path",
+                        "name": "id",
+                        "type": "string",
+                        "description":"User ID",
+                        "require": true
+                    }
+                ],
+                "responses":{
+                    "400":{
+                        "description":"Not Found"
+                    },
+                    "200":{
+                        "description":"OK"                  
+                    }
+                }
+            }
+        },
+
+
+        "/empresa":{
+            "post":{
+                "summary": "Create a new interprise",
+                "description":"Route responsible for creating a new interprise",
+                "tags": ["Empresa"],
+                "requestBody":{
+                    "content":{
+                        "application/json":{
+                            "schema":{
+                                "$ref": "#/components/schemas/Empresa"
+                            },
+                            "example":{
+                                "name_empresa": "admin",
+                                "cnpj_empresa": "5555555",
+                                "password_empresa":"12345",
+                                "email_empresa": "admin123@gmail.com",
+                                "endereco_empresa": "RUA admin",
+                                "telefone_empresa": "65admin",
+                                "logo_empresa": "./img.jpeg",
+                                "taxa_entrega_empresa": "6"
+                                }
+                            }
+                        }
+                    }
+                },
+                "responses":{
+                    "400":{
+                        "description":"Not Created"
+                    },
+                    "201":{
+                        "description":"Created",
+                        "content":{
+                            "application/json":{
+                                "schema":{
+                                    "type":"object",
+                                    "$ref":"#/components/schemas/Empresa"
+                                }
+                            }
+                        }
+                    }
+                }
+        },
+        "/empresa/":{
+            "get":{
+                "summary":"Search all interprises",
+                "description":"Route responsible for fetching all interprises",
+                "tags":  ["Empresa"],
+                "responses":{
+                    "400":{
+                        "description": "Not Found"
+                    },
+                    "200":{
+                        "description": "OK",
+                        "content":{
+                            "application/json":{
+                                "schema":{
+                                    "type":"array",
+                                    "items":{
+                                        "#ref":"#/components/schemas/Empresa"
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/empresa{id}":{
+            "get":{
+                "summary": "Search interprise by id",
+                "description":"Route responsible for searching for interprise by id",
+                "tags": ["Empresa"],
+                "parameters":[
+                    {
+                        "in": "path",
+                        "name": "id",
+                        "type": "string",
+                        "description":"User ID",
+                        "require": true
+                    }
+                ],
+                "responses":{
+                    "400":{
+                        "description":"Not Found"
+                    },
+                    "200":{
+                        "description":"OK",
+                        "content":{
+                            "application/json":{
+                                "schema":{
+                                    "type":"object",
+                                    "$ref":"#/components/schemas/Empresa"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/empresa/{id}":{
+            "patch":{
+                "summary":"Update interprise by id",
+                "description":"Route responsible for editing the interprise by id",
+                "tags": ["Empresa"],
+                "parameters": [
+                    {
+                        "in": "path",
+                        "name": "id",
+                        "type": "string",
+                        "description":"User ID",
+                        "require": true
+                    }
+                ],
+                "requestBody":{
+                    "content":{
+                        "application/json":{
+                            "schema":{
+                                "$ref":"#/components/schemas/Empresa"
+                            },
+                            "example":{
+                                "name_empresa": "Loja 1"
+                            }
+                        }
+                    }
+                },
+                "responses":{
+                    "400":{
+                        "description": "Not Found"
+                    },
+                    "200":{
+                        "description": "OK",
+                        "content":{
+                            "application/json":{
+                                "schema":{
+                                    "type": "object",
+                                    "$ref":"#/components/schemas/Empresa"
+                                }
+                            }
+                        }
+                    }
+                }
+              } 
+        },
+
+        "/autenticacao-user/":{
+            "post": {
+                "summary": "Login user",
+                "description": "Route responsible for logging in a registered user",
+                "tags": ["Auth"],
+                "requestBody": {
+                  "content": {
+                    "application/json": {
+                      "schema": {
+                        "$ref": "#/components/schemas/User"
+                      },
+                      "examples": {
+                        "User": {
+                          "value": {
+                            "email_entregador": "admin123@gmail.com",
+                            "password_entregador":"123"
+                          }
+                        }
+                      }
+                    }
+                  }
+                },
+                "responses": {
+                  "400": {
+                    "description": "Not Found"
+                  },
+                  "200": {
+                    "description": "OK"
+                  }
+                }
+              }
+        },
+        "/autenticacao-empresa":{
+            "post": {
+                "summary": "Login interprise",
+                "description": "Route responsible for logging in a registered interprise",
+                "tags": ["Auth"],
+                "requestBody": {
+                  "content": {
+                    "application/json": {
+                      "schema": {
+                        "$ref": "#/components/schemas/Empresa"
+                      },
+                      "examples": {
+                        "Empresa": {
+                          "value": {
+                            "email_empresa": "admin123@gmail.com",
+                            "password_empresa":"12345"
+                          }
+                        }
+                      }
+                    }
+                  }
+                },
+                "responses": {
+                  "400": {
+                    "description": "Not Found"
+                  },
+                  "200": {
+                    "description": "OK"
+                  }
+                }
+              }
+        }
+    },
+    
+    "components":{
+        "securitySchemes":{
+            "bearerAuth":{
+                "type":"http",
+                "scheme":"bearer",
+                "bearerFormat":"JWT"
+            }
+        },
+        "schemas":{
+            "User":{
+                "type": "object",
+                "properties":{
+                    "name_entregador": { 
+                        "type": "String", 
+                        "require": "true" 
+                    },
+                    "cpf_entregador": { 
+                        "type": "String", 
+                        "require": "true", 
+                        "unique": "true" 
+                    },
+                    "password_entregador": { 
+                        "type": "String", 
+                        "require": "true", 
+                        "select": "false" 
+                    },
+                    "email_entregador": { 
+                        "type": "String", 
+                        "require": "true "
+                    },
+                    "formaDepagamento_entregador": { 
+                        "type": "String",
+                         "require": "true "
+                    }
+                }
+            },
+            "Pedido":{
+                "codigo_pedido": { 
+                    "type": "String", 
+                    "require": true, 
+                    "unique": true 
+                },
+                "name_cliente": { 
+                    "type": "String", 
+                    "require": true 
+                },
+                "valor_pedido": { 
+                    "type": "String", 
+                    "require": true 
+                },
+                "endereco_cliente": { 
+                    "type": "String", 
+                    "require": true 
+                },
+                "telefone_cliente": { 
+                    "type": "String", 
+                    "require": true 
+                },
+                "descricao_pedido": { 
+                    "type": "String",
+                     "require": true 
+                    },
+                "forma_pagamento": { 
+                    "type": "String", 
+                    "require": true 
+                },
+                "taxa_entrega": { 
+                    "type": "String", 
+                    "require": true 
+                },
+                "name_empresa": {
+                  "type": "mongoose.Types.ObjectId",
+                  "ref": "Empresa",
+                  "require": true
+                }
+            },
+            "PedidoAceito": {
+                "detalhes_pedido": {
+                    "codigo_pedido": { 
+                        "type": "String", 
+                        "require": true
+                     },
+                    "name_cliente": { 
+                        "type": "String", 
+                        "require": true 
+                    },
+                    "valor_pedido": { 
+                        "type": "String", 
+                        "require": true 
+                    },
+                    "endereco_cliente": { 
+                        "type": "String", 
+                        "require": true 
+                    },
+                    "telefone_cliente": { 
+                        "type": "String", 
+                        "require": true 
+                    },
+                    "descricao_pedido": { 
+                        "type": "String", 
+                        "require": true 
+                    },
+                    "forma_pagamento": { 
+                        "type": "String", 
+                        "require": true 
+                    },
+                    "taxa_entrega": { 
+                        "type": "String", 
+                        "require": true 
+                    }
+                  },
+                  "name_entregador": {
+                    "type": "mongoose.Types.ObjectId",
+                    "ref": "User",
+                    "require": true
+                  },
+                  "name_empresa": {
+                    "type": "mongoose.Types.ObjectId",
+                    "ref": "Empresa",
+                    "require": true
+                  }
+            },
+            "HistoricoPedidos":{
+                "detalhes_pedido": {
+                    "codigo_pedido": { 
+                        "type": "String", 
+                        "require": true 
+                    },
+                    "name_cliente": { 
+                        "type": "String", 
+                        "require": true 
+                    },
+                    "valor_pedido": { 
+                        "type": "String", 
+                        "require": true 
+                    },
+                    "endereco_cliente": { 
+                        "type": "String",
+                         "require": true 
+                        },
+                    "telefone_cliente": { 
+                        "type": "String", 
+                        "require": true 
+                    },
+                    "descricao_pedido": { 
+                        "type": "String", 
+                        "require": true 
+                    },
+                    "forma_pagamento": { 
+                        "type": "String", 
+                        "require": true 
+                    },
+                    "taxa_entrega": { 
+                        "type": "String", 
+                        "require": true 
+                    }
+                  },
+                  "name_entregador": {
+                    "type": "mongoose.Types.ObjectId",
+                    "ref": "User",
+                    "require": true
+                  },
+                  "name_empresa": {
+                    "type": "mongoose.Types.ObjectId",
+                    "ref": "Empresa",
+                    "require": true
+                  }
+            },
+            "Empresa":{
+               " name_empresa": { 
+                    "type": "String", 
+                    "require": true 
+                },
+                "cnpj_empresa": { 
+                    "type":" String", 
+                    "require": true, 
+                    "unique": true 
+                },
+                "password_empresa": { 
+                    "type": "String", 
+                    "require": true, 
+                    "select": false 
+                },
+                "email_empresa": { 
+                    "type": "String", 
+                    "require": true, 
+                    "unique": true 
+                },
+                "endereco_empresa": { 
+                    "type": "String", 
+                    "require": true 
+                },
+                "telefone_empresa": { 
+                    "type": "String", 
+                    "require": true 
+                },
+                "logo_empresa": "Buffer",
+                "taxa_entrega_empresa": { 
+                    "type": "String", 
+                    "require": true 
+                }
+            }
+        }
+    }
+}
