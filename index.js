@@ -1,5 +1,7 @@
 import express from "express";
 
+import cors from "cors";
+
 import UserRoute from "./src/Routes/user.route.js";
 import EmpresaRoute from "./src/Routes/empresa.route.js";
 
@@ -21,6 +23,8 @@ dotenv.config();
 
 const app = express();
 const port = process.env.PORT || 3000;
+
+app.use(cors());
 
 ConnectMongoDB();
 app.use(express.json());
