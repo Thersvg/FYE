@@ -20,7 +20,7 @@ const autenticacaoControllerLogin = async (req, res) => {
 
     const token = AutenticacaoService.GeradorDeToken(empresa.id);
 
-    res.status(200).send({ token });
+    return res.send(token);
   } catch (err) {
     res.status(500).send({ message: err });
   }

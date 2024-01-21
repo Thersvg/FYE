@@ -74,7 +74,13 @@ const FindAllEmpresaController = async (req, res) => {
 
 const FindIdEmpresaController = async (req, res) => {
   try {
-    const empresa = req.empresa;
+    /*     const empresa = req.empresa; */
+
+    const empresa = req.empresaAutenticada;
+
+    /*     req.empresaId = empresa.id;
+    req.empresaAutenticada = empresa; */
+
     res.send(empresa);
   } catch (err) {
     res.status(500).send({ message: err.message });

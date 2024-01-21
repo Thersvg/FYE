@@ -34,8 +34,15 @@ const validUser = async (req, res, next) => {
 };
 
 const validEmpresa = async (req, res, next) => {
+  
   try {
-    const id = req.params.id;
+    let id = req.params.id;
+    const idLogged = req.empresaId;
+
+    if (!id) {
+      id = idLogged;
+    }
+
     const Empresa = await EmpresaService.findIdEmpresaService(id);
 
     if (!Empresa) {

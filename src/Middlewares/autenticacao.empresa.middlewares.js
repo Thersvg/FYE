@@ -34,6 +34,8 @@ const autenticacaoMiddlware = (req, res, next) => {
       }
 
       req.empresaId = empresa.id;
+      req.empresaAutenticada = empresa;
+
       next();
     });
   } catch (err) {
