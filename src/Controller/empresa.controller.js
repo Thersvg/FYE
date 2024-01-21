@@ -1,5 +1,6 @@
 import EmpresaService from "../Services/empresa.service.js";
 import fs from "fs";
+import authEmpresa from "../Services/autenticacao.service.js";
 
 const CreateEmpresaController = async (req, res) => {
   try {
@@ -30,15 +31,17 @@ const CreateEmpresaController = async (req, res) => {
     }
 
     const Empresa = await EmpresaService.createEmpresaService(req.body);
+    const token = authEmpresa.GeradorDeToken(Empresa._id);
 
     if (!Empresa) {
       return res.status(400).send({ message: "Erro na criação da empresa" });
     }
-
     const dadosImagemLogo_empresa = fs.readFileSync(logo_empresa);
 
     res.status(201).send({
+      token,
       message: "Empresa criado com sucesso",
+
       Empresa: {
         id: Empresa._id,
         name_empresa,
