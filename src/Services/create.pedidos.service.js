@@ -10,9 +10,12 @@ const FindPedidoByIdService = (id) =>
 
 const deleteByIdService = (id) => Pedidos.deleteOne({ _id: id });
 
+const findByIdService = (id) => Pedidos.findById({ _id: id });
+
 export default {
   CreatePedidosService,
   AllPedidosService,
   deleteByIdService,
   FindPedidoByIdService,
+  findByIdService,
 };

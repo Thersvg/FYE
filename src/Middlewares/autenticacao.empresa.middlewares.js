@@ -23,14 +23,14 @@ const autenticacaoMiddlware = (req, res, next) => {
 
     jwt.verify(token, process.env.SECRET_KEY_JWT, async (error, decoded) => {
       if (error) {
-        return res.status(401).send({ message: "Token Inválido 1" });
+        return res.status(401).send({ message: "Token Inválido" });
       }
       console.log(decoded);
 
       const empresa = await EmpresaService.findIdEmpresaService(decoded.id);
 
       if (!empresa || !empresa.id) {
-        return res.status(400).send({ message: "Tokin inválido 2" });
+        return res.status(400).send({ message: "Empresa e Id não existem" });
       }
 
       req.empresaId = empresa.id;

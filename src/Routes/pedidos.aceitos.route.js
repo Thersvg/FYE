@@ -14,7 +14,7 @@ PedidosAceitosRouter.post(
 );
 
 PedidosAceitosRouter.get(
-  "/",
+  "/All",
   PedidosAceitosController.AllPedidosAceitosController
 );
 
