@@ -53,6 +53,17 @@ const AllPedidosController = async (req, res) => {
   res.send({ pedidos });
 };
 
+const FindPedidoById = async (req, res) => {
+  const id = req.empresaId;
+  const pedido = await PedidosService.FindPedidoByIdService(id);
+
+  if (!pedido) {
+    return res.status(400).send({ message: "Não há pedidos criados" });
+  }
+
+  res.send(pedido);
+};
+
 const DeletePedido = async (req, res) => {
   try {
     const id = req.params.id;
@@ -64,4 +75,9 @@ const DeletePedido = async (req, res) => {
   }
 };
 
-export default { CreatePedidosController, AllPedidosController, DeletePedido };
+export default {
+  CreatePedidosController,
+  AllPedidosController,
+  DeletePedido,
+  FindPedidoById,
+};

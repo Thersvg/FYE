@@ -5,13 +5,16 @@ const CreatePedidosService = (body) => Pedidos.create(body);
 const AllPedidosService = () =>
   Pedidos.find().sort({ _id: -1 }).populate("name_empresa");
 
-const deleteByIdService = (id) => Pedidos.deleteOne({ _id: id });
+const FindPedidoByIdService = (id) =>
+  Pedidos.findOne({ name_empresa: id })
+    .sort({ _id: -1 })
+    .populate("name_empresa");
 
-const findByIdService = (id) => Pedidos.findById({ _id: id });
+const deleteByIdService = (id) => Pedidos.deleteOne({ _id: id });
 
 export default {
   CreatePedidosService,
   AllPedidosService,
   deleteByIdService,
-  findByIdService,
+  FindPedidoByIdService,
 };

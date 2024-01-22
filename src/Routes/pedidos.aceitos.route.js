@@ -10,7 +10,7 @@ PedidosAceitosRouter.post(
   "/:id",
   auth.autenticacaoMiddlware,
   global.validId,
-  PedidosAceitosController.CreatePedidosController,
+  PedidosAceitosController.CreatePedidosController
 );
 
 PedidosAceitosRouter.get(
@@ -19,8 +19,8 @@ PedidosAceitosRouter.get(
 );
 
 PedidosAceitosRouter.get(
-  "/:id",
-  global.validId,
+  "/:id?",
+  auth.autenticacaoMiddlware,
   global.BuscaEmpresaEPedido,
   PedidosAceitosController.SelecionarPedidosPorEmpresaId
 );

@@ -9,8 +9,14 @@ PedidosRouter.post(
   auth.autenticacaoMiddlware,
   PedidosController.CreatePedidosController
 );
-PedidosRouter.get("/", PedidosController.AllPedidosController);
+PedidosRouter.get("/All", PedidosController.AllPedidosController);
 
-PedidosRouter.delete("/:id", PedidosController.DeletePedido);
+PedidosRouter.get(
+  "/:id?",
+  auth.autenticacaoMiddlware,
+  PedidosController.FindPedidoById
+);
+
+PedidosRouter.delete("/:id?", PedidosController.DeletePedido);
 
 export default PedidosRouter;

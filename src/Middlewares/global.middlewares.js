@@ -34,7 +34,6 @@ const validUser = async (req, res, next) => {
 };
 
 const validEmpresa = async (req, res, next) => {
-  
   try {
     let id = req.params.id;
     const idLogged = req.empresaId;
@@ -59,7 +58,7 @@ const validEmpresa = async (req, res, next) => {
 
 const BuscaEmpresaEPedido = async (req, res, next) => {
   try {
-    const id = req.id;
+    const id = req.empresaId;
 
     const EmpresaEpedido = await PedidosGerais.FindPedidosAceitosById(id);
 
