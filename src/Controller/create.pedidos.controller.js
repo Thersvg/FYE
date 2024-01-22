@@ -55,13 +55,12 @@ const AllPedidosController = async (req, res) => {
 
 const FindPedidoById = async (req, res) => {
   const id = req.empresaId;
-  const pedido = await PedidosService.FindPedidoByIdService(id);
+  const pedidos = await PedidosService.FindPedidoByIdService(id);
 
-  if (!pedido) {
+  if (!pedidos) {
     return res.status(400).send({ message: "Não há pedidos criados" });
   }
-
-  res.send(pedido);
+  res.send(pedidos);
 };
 
 const DeletePedido = async (req, res) => {

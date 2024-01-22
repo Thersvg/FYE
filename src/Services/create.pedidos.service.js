@@ -6,9 +6,7 @@ const AllPedidosService = () =>
   Pedidos.find().sort({ _id: -1 }).populate("name_empresa");
 
 const FindPedidoByIdService = (id) =>
-  Pedidos.findOne({ name_empresa: id })
-    .sort({ _id: -1 })
-    .populate("name_empresa");
+  Pedidos.find({ name_empresa: id }).populate("name_empresa");
 
 const deleteByIdService = (id) => Pedidos.deleteOne({ _id: id });
 
