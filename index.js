@@ -39,8 +39,8 @@ app.use("/autenticacao-user", UserAutenticacao);
 
 app.use("/pedido", CreatePedidosCreateViewAll);
 
-app.use("/pedidos-aceitos", PedidosAceitosRouter);
-app.use("/pedidos-aceito-empresa", PedidosAceitosParaEmpresas);
+/* app.use("/pedidos-aceitos", PedidosAceitosRouter); */
+app.use("/pedidos-aceito", PedidosAceitosParaEmpresas);
 
 app.use("/historico-pedido", HistoricoPedidos);
 

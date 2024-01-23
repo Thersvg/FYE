@@ -10,7 +10,7 @@ const AllPedidosAceitosService = () =>
     .populate("detalhes_pedido");
 
 const FindPedidosAceitosById = (id) =>
-  PedidosAceitos.findOne({ name_empresa: id })
+  PedidosAceitos.find({ name_empresa: id })
     .sort({ _id: -1 })
     .populate("name_entregador")
     .populate("name_empresa")

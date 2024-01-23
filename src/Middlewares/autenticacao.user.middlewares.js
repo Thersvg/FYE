@@ -32,7 +32,7 @@ const autenticacaoMiddlware = (req, res, next) => {
       if (!user || !user.id) {
         return res.status(400).send({ message: "Tokin inválido 2" });
       }
-      
+
       req.entregadorId = user.id;
 
       next();

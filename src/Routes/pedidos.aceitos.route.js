@@ -4,7 +4,7 @@ const PedidosAceitosRouter = Router();
 import PedidosAceitosController from "../Controller/pedidos.aceitos.controller.js";
 
 import global from "../Middlewares/global.middlewares.js";
-import auth from "../Middlewares/autenticacao.user.middlewares.js";
+import auth from "../Middlewares/autenticacao.empresa.middlewares.js";
 
 PedidosAceitosRouter.post(
   "/:id",
@@ -19,7 +19,7 @@ PedidosAceitosRouter.get(
 );
 
 PedidosAceitosRouter.get(
-  "/:id?",
+  "/empresa/:id?",
   auth.autenticacaoMiddlware,
   global.BuscaEmpresaEPedido,
   PedidosAceitosController.SelecionarPedidosPorEmpresaId
