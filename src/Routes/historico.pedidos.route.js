@@ -2,6 +2,7 @@ import { Router } from "express";
 const PedidosHstoricoRouter = Router();
 
 import auth from "../Middlewares/global.middlewares.js";
+import authEmpresa from "../Middlewares/autenticacao.empresa.middlewares.js"
 import HistoricoPedidosController from "../Controller/HistoricoPedidos.controller.js";
 
 PedidosHstoricoRouter.post(
@@ -11,13 +12,13 @@ PedidosHstoricoRouter.post(
   HistoricoPedidosController.PedidoEntregue
 );
 PedidosHstoricoRouter.get(
-  "/empresa/:id",
-  auth.validId,
+  "/empresa/:id?",
+  authEmpresa.autenticacaoMiddlware,
   HistoricoPedidosController.HistoricoCompletoDePedidosEntregues
 );
 
 PedidosHstoricoRouter.get(
-  "/entregador/:id",
+  "/entregador/:id?",
   auth.validId,
   HistoricoPedidosController.HistoricoCompletoDePedidosEntreguesEntregador
 );

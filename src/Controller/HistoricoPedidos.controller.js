@@ -49,10 +49,10 @@ const PedidoEntregue = async (req, res) => {
 
 const HistoricoCompletoDePedidosEntregues = async (req, res) => {
   try {
-    const id = req.id;
+    const id = req.empresaId;
     const AllPedidosEntregues =
       await HistoricoPedidosService.FindPedidosHistoricoById(id);
-    res.send(AllPedidosEntregues);
+     res.send(AllPedidosEntregues);
   } catch (err) {
     res.status(500).send({ message: err.message });
   }

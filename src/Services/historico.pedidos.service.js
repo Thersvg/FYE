@@ -5,7 +5,7 @@ const CreatePedidosHistoricoService = (body) =>
 
 
 const FindPedidosHistoricoById = (id) =>
-  HistoricoPedidosModel.findOne({ name_empresa: id })
+  HistoricoPedidosModel.find({ name_empresa: id })
     .sort({ _id: -1 })
     .populate("name_entregador")
     .populate("name_empresa")
