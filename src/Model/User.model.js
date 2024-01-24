@@ -3,8 +3,9 @@ import bcrypt from "bcrypt";
 
 const UserSchema = new mongoose.Schema({
   name_entregador: { type: String, require: true },
-  cpf_entregador: { type: String, require: true, unique: true },
+  cpf_entregador: { type: String, require: true },
   password_entregador: { type: String, require: true, select: false },
+  telefone_entregador: { type: String, require: true },
   email_entregador: { type: String, require: true },
   formaDepagamento_entregador: { type: String, require: true },
 });

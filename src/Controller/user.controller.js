@@ -6,6 +6,7 @@ const create_User_Controller = async (req, res) => {
       name_entregador,
       cpf_entregador,
       password_entregador,
+      telefone_entregador,
       email_entregador,
       formaDepagamento_entregador,
     } = req.body;
@@ -14,6 +15,7 @@ const create_User_Controller = async (req, res) => {
       !name_entregador ||
       !cpf_entregador ||
       !password_entregador ||
+      !telefone_entregador ||
       !email_entregador ||
       !formaDepagamento_entregador
     ) {
@@ -33,6 +35,7 @@ const create_User_Controller = async (req, res) => {
         name_entregador,
         cpf_entregador,
         password_entregador,
+        telefone_entregador,
         email_entregador,
         formaDepagamento_entregador,
       },
@@ -71,6 +74,7 @@ const UpdateUser_Controller = async (req, res) => {
       name_entregador,
       cpf_entregador,
       password_entregador,
+      telefone_entregador,
       email_entregador,
       formaDepagamento_entregador,
     } = req.body;
@@ -79,6 +83,7 @@ const UpdateUser_Controller = async (req, res) => {
       !name_entregador &&
       !cpf_entregador &&
       !password_entregador &&
+      !telefone_entregador &&
       !email_entregador &&
       !formaDepagamento_entregador
     ) {
@@ -92,6 +97,7 @@ const UpdateUser_Controller = async (req, res) => {
       name_entregador,
       cpf_entregador,
       password_entregador,
+      telefone_entregador,
       email_entregador,
       formaDepagamento_entregador
     );

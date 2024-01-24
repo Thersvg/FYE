@@ -37,6 +37,7 @@ const CreatePedidosController = async (req, res, next) => {
       cpf_entregador,
       password_entregador,
       email_entregador,
+      telefone_entregador,
       formaDepagamento_entregador,
     } = EntregadorDB;
 

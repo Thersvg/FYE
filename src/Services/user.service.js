@@ -11,6 +11,7 @@ const UpdateUser_Controller = (
   name_entregador,
   cpf_entregador,
   password_entregador,
+  telefone_entregador,
   email_entregador,
   formaDepagamento_entregador
 ) =>
@@ -20,6 +21,7 @@ const UpdateUser_Controller = (
       name_entregador,
       cpf_entregador,
       password_entregador,
+      telefone_entregador,
       email_entregador,
       formaDepagamento_entregador,
     }

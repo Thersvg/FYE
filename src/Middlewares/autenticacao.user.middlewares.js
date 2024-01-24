@@ -4,7 +4,7 @@ import UserService from "../Services/user.service.js";
 
 dotenv.config();
 
-const autenticacaoMiddlware = (req, res, next) => {
+const autenticacaoMiddlwareUser = (req, res, next) => {
   try {
     const { authorization } = req.headers;
 
@@ -34,6 +34,7 @@ const autenticacaoMiddlware = (req, res, next) => {
       }
 
       req.entregadorId = user.id;
+      req.userEntregador = user;
 
       next();
     });
@@ -42,4 +43,4 @@ const autenticacaoMiddlware = (req, res, next) => {
   }
 };
 
-export default { autenticacaoMiddlware };
+export default { autenticacaoMiddlwareUser };

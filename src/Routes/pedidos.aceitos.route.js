@@ -5,10 +5,11 @@ import PedidosAceitosController from "../Controller/pedidos.aceitos.controller.j
 
 import global from "../Middlewares/global.middlewares.js";
 import auth from "../Middlewares/autenticacao.empresa.middlewares.js";
+import authuser from "../Middlewares/autenticacao.user.middlewares.js";
 
 PedidosAceitosRouter.post(
-  "/:id",
-  auth.autenticacaoMiddlware,
+  "/:id?",
+  authuser.autenticacaoMiddlwareUser,
   global.validId,
   PedidosAceitosController.CreatePedidosController
 );

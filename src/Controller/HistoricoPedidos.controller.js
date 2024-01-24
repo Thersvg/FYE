@@ -52,7 +52,7 @@ const HistoricoCompletoDePedidosEntregues = async (req, res) => {
     const id = req.empresaId;
     const AllPedidosEntregues =
       await HistoricoPedidosService.FindPedidosHistoricoById(id);
-     res.send(AllPedidosEntregues);
+    res.send(AllPedidosEntregues);
   } catch (err) {
     res.status(500).send({ message: err.message });
   }
@@ -69,8 +69,20 @@ const HistoricoCompletoDePedidosEntreguesEntregador = async (req, res) => {
   }
 };
 
+const DeleteOrderById = async (req, res) => {
+  try {
+    const id = req.id;
+    await HistoricoPedidosService.DeletePedidoHistorico(id);
+    res.status(200).send({ message: "Pedido Finalizado" });
+  } catch (error) {
+    res.status(500).send({ message: error.message });
+    throw error;
+  }
+};
+
 export default {
   PedidoEntregue,
   HistoricoCompletoDePedidosEntregues,
   HistoricoCompletoDePedidosEntreguesEntregador,
+  DeleteOrderById,
 };
