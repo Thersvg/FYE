@@ -113,17 +113,18 @@ const UpdateEmpresaController = async (req, res) => {
       res.status(400).send({ message: "Preencha pelo menos um campo" });
     }
 
-    const id = req.id;
+    /*     const id = req.id; */
+    const id = req.empresaId;
 
     await EmpresaService.updateEmpresaService(
       name_empresa,
-      cnpj,
-      password,
-      email,
-      endereco,
-      telefone,
-      logo,
-      taxa_entrega,
+      cnpj_empresa,
+      password_empresa,
+      email_empresa,
+      endereco_empresa,
+      telefone_empresa,
+      logo_empresa,
+      taxa_entrega_empresa,
       id
     );
     res.status(200).send({ message: "Dados atualizados com sucesso" });

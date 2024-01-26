@@ -14,9 +14,10 @@ EmpresaRouter.get(
   EmpresaController.FindIdEmpresaController
 );
 EmpresaRouter.patch(
-  "/:id",
-  global.validId,
-  global.validEmpresa,
+  "/:id?",
+  /*   global.validId, */
+  auth.autenticacaoMiddlware,
+  /*   global.validEmpresa, */
   EmpresaController.UpdateEmpresaController
 );
 
