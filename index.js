@@ -22,7 +22,7 @@ import swaggerRoute from "./src/Routes/swagger.route.js";
 dotenv.config();
 
 const app = express();
-const port = process.env.PORT || 3000;
+const port = process.env.PORT || 4000;
 
 app.use(cors());
 
@@ -44,4 +44,4 @@ app.use("/pedidos-aceito", PedidosAceitosParaEmpresas);
 
 app.use("/historico-pedido", HistoricoPedidos);
 
-app.listen(3000, () => console.log(`Servidor rodando na porta ${port}`));
+app.listen(4000, () => console.log(`Servidor rodando na porta ${port}`));
