@@ -36,9 +36,7 @@ const CreateEmpresaController = async (req, res) => {
     if (!Empresa) {
       return res.status(400).send({ message: "Erro na criação da empresa" });
     }
-    const ReadImage = fs.readFileSync(logo_empresa); 
-    const dadosImagemLogo_empresa = new Binary(ReadImage);
-
+    
     res.status(201).send({
       token,
       message: "Empresa criado com sucesso",
@@ -51,7 +49,7 @@ const CreateEmpresaController = async (req, res) => {
         email_empresa,
         endereco_empresa,
         telefone_empresa,
-        dadosImagemLogo_empresa,
+        logo_empresa,
         taxa_entrega_empresa,
       },
     });
@@ -101,7 +99,8 @@ const UpdateEmpresaController = async (req, res) => {
       taxa_entrega_empresa,
     } = req.body;
 
-/*     if (
+
+     if (
       !name_empresa &&
       !cnpj_empresa &&
       !password_empresa &&
@@ -111,14 +110,15 @@ const UpdateEmpresaController = async (req, res) => {
       !logo_empresa &&
       !taxa_entrega_empresa
     ) {
-      res.status(400).send({ message: "Preencha pelo menos um campo" });
-    } */
+      res.status(400).send({ message: "Atualize algum dado"});
+    } 
 
     /*     const id = req.id; */
     const id = req.empresaId;
 
-    const imageBuffer = fs.readFileSync(logo_empresa); 
-    logo_empresa = imageBuffer.toString('base64');
+/*     const imageBuffer = fs.readFileSync(logo_empresa); 
+    logo_empresa = imageBuffer.toString('base64'); */
+
 
     await EmpresaService.updateEmpresaService(
       name_empresa,
