@@ -115,11 +115,7 @@ const UpdateEmpresaController = async (req, res) => {
 
     /*     const id = req.id; */
     const id = req.empresaId;
-
-/*     const imageBuffer = fs.readFileSync(logo_empresa); 
-    logo_empresa = imageBuffer.toString('base64'); */
-
-
+    
     await EmpresaService.updateEmpresaService(
       name_empresa,
       cnpj_empresa,

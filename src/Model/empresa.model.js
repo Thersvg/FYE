@@ -8,7 +8,7 @@ const EmpresaSchema = new mongoose.Schema({
   email_empresa: { type: String, require: true },
   endereco_empresa: { type: String, require: true },
   telefone_empresa: { type: String, require: true },
-  logo_empresa: Buffer,
+  logo_empresa: { type: String},
   taxa_entrega_empresa: { type: String, require: true },
 });
 
