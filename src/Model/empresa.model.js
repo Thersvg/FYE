@@ -6,10 +6,11 @@ const EmpresaSchema = new mongoose.Schema({
   cnpj_empresa: { type: String, require: true, unique: true },
   password_empresa: { type: String, require: true, select: false },
   email_empresa: { type: String, require: true },
-  endereco_empresa: { type: String, require: true },
+  endereco_empresa: { type: String },
   telefone_empresa: { type: String, require: true },
   logo_empresa: { type: String},
-  taxa_entrega_empresa: { type: String, require: true },
+  taxa_entrega_empresa: { type: String },
+  cidade_empresa: { type: String, require: true }
 });
 
 EmpresaSchema.pre("save", async function (next) {

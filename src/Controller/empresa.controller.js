@@ -1,5 +1,4 @@
 import EmpresaService from "../Services/empresa.service.js";
-import fs from "fs";
 import authEmpresa from "../Services/autenticacao.service.js";
 
 const CreateEmpresaController = async (req, res) => {
@@ -13,6 +12,7 @@ const CreateEmpresaController = async (req, res) => {
       telefone_empresa,
       logo_empresa,
       taxa_entrega_empresa,
+      cidade_empresa,
     } = req.body;
 
     if (
@@ -20,10 +20,11 @@ const CreateEmpresaController = async (req, res) => {
       !cnpj_empresa ||
       !password_empresa ||
       !email_empresa ||
-      !endereco_empresa ||
+      !endereco_empresa || 
       !telefone_empresa ||
-      !logo_empresa ||
-      !taxa_entrega_empresa
+      !logo_empresa || 
+      !taxa_entrega_empresa || 
+      !cidade_empresa
     ) {
       return res
         .status(400)
@@ -51,6 +52,7 @@ const CreateEmpresaController = async (req, res) => {
         telefone_empresa,
         logo_empresa,
         taxa_entrega_empresa,
+        cidade_empresa,
       },
     });
   } catch (err) {
@@ -97,6 +99,7 @@ const UpdateEmpresaController = async (req, res) => {
       telefone_empresa,
       logo_empresa,
       taxa_entrega_empresa,
+      cidade_empresa
     } = req.body;
 
 
@@ -108,7 +111,8 @@ const UpdateEmpresaController = async (req, res) => {
       !endereco_empresa &&
       !telefone_empresa &&
       !logo_empresa &&
-      !taxa_entrega_empresa
+      !taxa_entrega_empresa &&
+      !cidade_empresa
     ) {
       res.status(400).send({ message: "Atualize algum dado"});
     } 
@@ -125,6 +129,7 @@ const UpdateEmpresaController = async (req, res) => {
       telefone_empresa,
       logo_empresa,
       taxa_entrega_empresa,
+      cidade_empresa,
       id
     );
     res.status(200).send({ message: "Dados atualizados com sucesso" });
