@@ -1,8 +1,5 @@
 import mongoose from "mongoose";
-
-let dbName = 'PonteseLacerdamt';
-
-const ConnectMongoDB = () => {
+const ConnectMongoDB = (dbName) => {
   console.log("Esperando conexão com o Banco de dados");
   mongoose
     .connect(process.env.MONGOODB_URL + `${dbName}`)

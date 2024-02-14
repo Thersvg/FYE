@@ -56,7 +56,7 @@ const CreateEmpresaController = async (req, res) => {
       },
     });
   } catch (err) {
-    res.status(500).send({ message: err.message });
+    res.status(500).send({ message: "Erro ao criar conta" });
   }
 };
 
@@ -148,6 +148,7 @@ const DeleteEmpresa = async (req, res) => {
     res.status(500).send({ message: err.message });
   }
 };
+
 
 export default {
   CreateEmpresaController,

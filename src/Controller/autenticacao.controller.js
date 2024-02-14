@@ -4,7 +4,9 @@ import AutenticacaoService from "../Services/autenticacao.service.js";
 const autenticacaoControllerLogin = async (req, res) => {
   try {
     const { email_empresa, password_empresa } = req.body;
+
     const empresa = await AutenticacaoService.LoginService(email_empresa);
+
     const passwordIsValid = bcrypt.compareSync(
       password_empresa,
       empresa.password_empresa
@@ -22,7 +24,7 @@ const autenticacaoControllerLogin = async (req, res) => {
 
     return res.send(token);
   } catch (err) {
-    res.status(500).send({ message: err });
+    res.status(500).send({ message: "Email ou senha inválidos" });
   }
 };
 
