@@ -5,6 +5,8 @@ import EmpresaController from "../Controller/empresa.controller.js";
 import global from "../Middlewares/global.middlewares.js";
 import auth from "../Middlewares/autenticacao.empresa.middlewares.js";
 
+EmpresaRouter.post("/enviar-email", EmpresaController.SendEmail);
+
 EmpresaRouter.post("/", EmpresaController.CreateEmpresaController);
 EmpresaRouter.get("/AllEmpresas", EmpresaController.FindAllEmpresaController);
 EmpresaRouter.get(

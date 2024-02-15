@@ -1,5 +1,6 @@
 import EmpresaService from "../Services/empresa.service.js";
 import authEmpresa from "../Services/autenticacao.service.js";
+import nodemailer from 'nodemailer';
 
 const CreateEmpresaController = async (req, res) => {
   try {
@@ -149,6 +150,41 @@ const DeleteEmpresa = async (req, res) => {
   }
 };
 
+const SendEmail = async (req,res) =>{
+  try{
+    const {
+      email_empresa,
+    } = req.body;
+
+    const transporter = nodemailer.createTransport({
+      service: "gmail",
+      auth: {
+        user: 'rodrigo17ifmt@gmail.com',
+        pass: 'xudm bldd uauf wjvv',
+      },
+    });
+  
+    const mailOptions = {
+      from: 'rodrigo17ifmt@gmail.com',
+      to: `${email_empresa}`,
+      subject: 'Reset your Password',
+      text: 'Reset your Password',
+      html: '<p>Click here for reset your password</p> <link>www.google.com</link>',
+    };
+  
+    await transporter.sendMail(mailOptions, (error, info) => {
+
+      if (error) {
+        return console.error(error);
+      }
+      res.status(200).send({message: 'E-mail enviado: ' + info.response});
+    });
+  }catch (error){
+    res.status(500).send({message: 'Algo deu errado' + error});
+  }
+
+}
+
 
 export default {
   CreateEmpresaController,
@@ -156,4 +192,5 @@ export default {
   FindIdEmpresaController,
   UpdateEmpresaController,
   DeleteEmpresa,
+  SendEmail
 };
