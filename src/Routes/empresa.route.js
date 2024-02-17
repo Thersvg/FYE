@@ -16,13 +16,13 @@ EmpresaRouter.get(
   EmpresaController.FindIdEmpresaController
 );
 
-/* EmpresaRouter.patch(
+ EmpresaRouter.patch(
   "/:id?",
   auth.autenticacaoMiddlware,
   EmpresaController.UpdateEmpresaController
-); */
+); 
 
-EmpresaRouter.patch(
+EmpresaRouter.put(
   "/recover/:id?",
   EmpresaController.RecoverEmpresaController
 );
