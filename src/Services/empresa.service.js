@@ -8,6 +8,8 @@ const findIdEmpresaService = (id) => Empresa.findById(id);
 
 const deleteByIdService = (id) => Empresa.deleteOne({ _id: id });
 
+const FindEmailEmpresaService = (email) => Empresa.findOne({email_empresa:email});
+
 const updateEmpresaService = (
   name_empresa,
   cnpj_empresa,
@@ -35,10 +37,23 @@ const updateEmpresaService = (
     }
   );
 
+  const updatePasswordEmpresaService = (
+    password_empresa,
+    email_empresa,
+  ) =>
+    Empresa.findOneAndUpdate(
+      { email_empresa: email_empresa },
+      {
+        password_empresa
+      }
+    );
+
 export default {
   createEmpresaService,
   findAllEmpresaService,
   findIdEmpresaService,
   updateEmpresaService,
   deleteByIdService,
+  FindEmailEmpresaService,
+  updatePasswordEmpresaService,
 };

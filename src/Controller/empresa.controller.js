@@ -1,6 +1,7 @@
 import EmpresaService from "../Services/empresa.service.js";
 import authEmpresa from "../Services/autenticacao.service.js";
 import nodemailer from 'nodemailer';
+import bcrypt from "bcrypt";
 
 const CreateEmpresaController = async (req, res) => {
   try {
@@ -139,6 +140,25 @@ const UpdateEmpresaController = async (req, res) => {
   }
 };
 
+const RecoverEmpresaController = async (req, res) => {
+  try {
+    let {
+      password_empresa,
+      email_empresa
+    } = req.body;
+
+    const Senha = await bcrypt.hash(password_empresa, 10);
+  
+    await EmpresaService.updatePasswordEmpresaService(
+      password_empresa =  Senha,
+      email_empresa
+    );
+    res.status(200).send({ message: "Senha atualizada com sucesso" });
+  } catch (err) {
+    res.status(500).send({ message: err.message });
+  }
+};
+
 const DeleteEmpresa = async (req, res) => {
   try {
     const id = req.params.id;
@@ -163,22 +183,40 @@ const SendEmail = async (req,res) =>{
         pass: 'xudm bldd uauf wjvv',
       },
     });
+
+    const caracteresPermitidos =
+    "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
+    let resultado = "";
+
+    for (let i = 0; i < 6; i++) {
+      const indiceAleatorio = Math.floor(
+        Math.random() * caracteresPermitidos.length
+      );
+      resultado += caracteresPermitidos.charAt(indiceAleatorio);
+    }
   
     const mailOptions = {
       from: 'rodrigo17ifmt@gmail.com',
       to: `${email_empresa}`,
       subject: 'Reset your Password',
       text: 'Reset your Password',
-      html: '<p>Click here for reset your password</p> <link>www.google.com</link>',
+      html: `<p>Your Code ${resultado}</p>`,
     };
-  
-    await transporter.sendMail(mailOptions, (error, info) => {
 
-      if (error) {
-        return console.error(error);
-      }
-      res.status(200).send({message: 'E-mail enviado: ' + info.response});
-    });
+    const response = await EmpresaService.FindEmailEmpresaService(email_empresa);
+
+    if(response){
+      await transporter.sendMail(mailOptions, (error, info) => {
+
+        if (error) {
+          return console.error(error);
+        }
+        res.status(200).send(resultado);
+      });   
+    }else{
+      res.status(404).send({message: "Email inválido"});
+    }
+  
   }catch (error){
     res.status(500).send({message: 'Algo deu errado' + error});
   }
@@ -191,6 +229,7 @@ export default {
   FindAllEmpresaController,
   FindIdEmpresaController,
   UpdateEmpresaController,
+  RecoverEmpresaController,
   DeleteEmpresa,
   SendEmail
 };

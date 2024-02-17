@@ -15,13 +15,18 @@ EmpresaRouter.get(
   auth.autenticacaoMiddlware,
   EmpresaController.FindIdEmpresaController
 );
-EmpresaRouter.patch(
+
+/* EmpresaRouter.patch(
   "/:id?",
-  /*   global.validId, */
   auth.autenticacaoMiddlware,
-  /*   global.validEmpresa, */
   EmpresaController.UpdateEmpresaController
+); */
+
+EmpresaRouter.patch(
+  "/recover/:id?",
+  EmpresaController.RecoverEmpresaController
 );
+
 
 EmpresaRouter.delete("/:id", EmpresaController.DeleteEmpresa);
 
