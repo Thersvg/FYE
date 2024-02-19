@@ -50,7 +50,7 @@ const AllPedidosController = async (req, res) => {
     return res.status(400).send({ message: "Não há pedidos cadastrados" });
   }
 
-  res.send({ pedidos });
+  res.send(pedidos);
 };
 
 const FindPedidoById = async (req, res) => {
