@@ -58,7 +58,7 @@ const FindPedidoById = async (req, res) => {
   const pedidos = await PedidosService.FindPedidoByIdService(id);
 
   if (!pedidos) {
-    return res.status(400).send({ message: "Não há pedidos criados" });
+    return res.send({ message: "Não há pedidos disponíveis" });
   }
   res.send(pedidos);
 };
