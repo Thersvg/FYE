@@ -60,7 +60,7 @@ const HistoricoCompletoDePedidosEntregues = async (req, res) => {
 
 const HistoricoCompletoDePedidosEntreguesEntregador = async (req, res) => {
   try {
-    const id = req.id;
+    const id = req.entregadorId;
     const AllPedidosEntregues =
       await HistoricoPedidosService.FindPedidosHistoricoByIdEntregador(id);
     res.send(AllPedidosEntregues);
