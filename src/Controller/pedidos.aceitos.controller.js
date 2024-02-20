@@ -69,6 +69,7 @@ const CreatePedidosController = async (req, res, next) => {
       });
 
     await PedidosCriadosService.deleteByIdService(pedidoID);
+
     res.status(200).send({ message: "Pedido aceito com sucesso!" });
   } catch (err) {
     res.status(500).send({ message: err.message });
@@ -96,7 +97,7 @@ const PedidoAceitoEntregador = async (req, res) => {
       return res.send('');
     }
 
-    res.send(PedidoAceito);
+    res.status(200).send(PedidoAceito);
 
   } catch (err) {
     res.status(500).send({ message: err.message });
