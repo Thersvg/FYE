@@ -88,6 +88,21 @@ const AllPedidosAceitosController = async (req, res) => {
   }
 };
 
+const PedidoAceitoEntregador = async (req, res) => {
+  try {
+    const PedidoAceito = await PedidosAceptService.FindPedidosAceitosByIdEntregador(req.entregadorId);
+
+    if (PedidoAceito.length === 0) {
+      return res.send('');
+    }
+
+    res.send(PedidoAceito);
+
+  } catch (err) {
+    res.status(500).send({ message: err.message });
+  }
+};
+
 const SelecionarPedidosPorEmpresaId = async (req, res) => {
   try {
     const empresa = req.empresa;
@@ -101,4 +116,5 @@ export default {
   CreatePedidosController,
   AllPedidosAceitosController,
   SelecionarPedidosPorEmpresaId,
+  PedidoAceitoEntregador,
 };

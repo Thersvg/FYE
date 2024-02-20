@@ -20,6 +20,12 @@ PedidosAceitosRouter.get(
 );
 
 PedidosAceitosRouter.get(
+  "/entregador/",
+  authuser.autenticacaoMiddlwareUser,
+  PedidosAceitosController.PedidoAceitoEntregador
+);
+
+PedidosAceitosRouter.get(
   "/empresa/:id?",
   auth.autenticacaoMiddlware,
   global.BuscaEmpresaEPedido,

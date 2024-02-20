@@ -16,6 +16,13 @@ const FindPedidosAceitosById = (id) =>
     .populate("name_empresa")
     .populate("detalhes_pedido");
 
+const FindPedidosAceitosByIdEntregador = (id) =>
+  PedidosAceitos.find({ name_entregador: id })
+    .sort({ _id: -1 })
+    .populate("name_entregador")
+    .populate("name_empresa")
+    .populate("detalhes_pedido");
+
 const FindPedidosAceitosByIdPedido = (id) =>
   PedidosAceitos.findOne({ _id: id })
     .sort({ _id: -1 })
@@ -36,4 +43,5 @@ export default {
   DeletePedidoAceitoById,
   FindPedidosAceitosByIdPedido,
   DeletePedidoAceitoByIdDoPedido,
+  FindPedidosAceitosByIdEntregador,
 };

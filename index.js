@@ -9,9 +9,10 @@ import UserAutenticacao from "./src/Routes/autenticacao.user.route.js";
 import EmpresaAutenticacao from "./src/Routes/autenticacao.route.js";
 
 import CreatePedidosCreateViewAll from "./src/Routes/create.pedido.route.js";
-import PedidosAceitosRouter from "./src/Routes/pedidos.aceitos.route.js";
 
+import PedidosAceitosRouter from "./src/Routes/pedidos.aceitos.route.js";
 import PedidosAceitosParaEmpresas from "./src/Routes/pedidos.aceitos.route.js";
+
 import HistoricoPedidos from "./src/Routes/historico.pedidos.route.js";
 
 import ConnectMongoDB from "./src/Database/db.js";
@@ -44,7 +45,6 @@ app.use("/autenticacao-user", UserAutenticacao);
 app.use("/pedido", CreatePedidosCreateViewAll);
 
 app.use("/aceitar-pedido-user", PedidosAceitosRouter);
-
 app.use("/pedidos-aceito", PedidosAceitosParaEmpresas);
 
 app.use("/historico-pedido", HistoricoPedidos);
