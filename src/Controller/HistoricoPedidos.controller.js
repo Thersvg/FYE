@@ -63,7 +63,7 @@ const HistoricoCompletoDePedidosEntreguesEntregador = async (req, res) => {
     const id = req.entregadorId;
     const AllPedidosEntregues =
       await HistoricoPedidosService.FindPedidosHistoricoByIdEntregador(id);
-    res.send(AllPedidosEntregues);
+    res.status(200).send([AllPedidosEntregues]);
   } catch (err) {
     res.status(500).send({ message: err.message });
   }
