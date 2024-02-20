@@ -14,10 +14,10 @@ PedidosAceitosRouter.post(
   PedidosAceitosController.CreatePedidosController
 );
 
-/* PedidosAceitosRouter.get(
+PedidosAceitosRouter.get(
   "/All",
   PedidosAceitosController.AllPedidosAceitosController
-); */
+); 
 
 PedidosAceitosRouter.get(
   "/entregador/:id?",

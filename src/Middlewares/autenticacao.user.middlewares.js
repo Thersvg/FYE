@@ -11,7 +11,7 @@ const autenticacaoMiddlwareUser = (req, res, next) => {
     if (!authorization) {
       return res.send(401);
     }
-    
+
     const parts = authorization.split(" ");
 
     if (parts.length !== 2) {
@@ -28,12 +28,11 @@ const autenticacaoMiddlwareUser = (req, res, next) => {
       if (error) {
         return res.status(401).send({ message: "Token Inválido 1" });
       }
-      console.log(decoded);
 
       const user = await UserService.findByIdService(decoded.id);
 
       if (!user || !user.id) {
-        return res.status(404).send({ message: "Nenhum user encontrado" });
+        return res.status(400).send({ message: "Nenhum user encontrado" });
       }
 
       req.entregadorId = user.id;
