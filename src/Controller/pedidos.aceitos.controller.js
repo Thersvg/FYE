@@ -91,7 +91,8 @@ const AllPedidosAceitosController = async (req, res) => {
 
 const PedidoAceitoEntregador = async (req, res) => {
   try {
-    const PedidoAceito = await PedidosAceptService.FindPedidosAceitosByIdEntregador(req.entregadorId);
+    const id = req.entregadorId;
+    const PedidoAceito = await PedidosAceptService.FindPedidosAceitosByIdEntregador(id);
 
     if (PedidoAceito.length === 0) {
       return res.send('');
