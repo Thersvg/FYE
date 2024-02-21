@@ -10,7 +10,7 @@ const FindPedidosHistoricoById = (id) =>
     .populate("detalhes_pedido");
 
 const FindPedidosHistoricoByIdEntregador = (id) =>
-  HistoricoPedidosModel.findOne({ name_entregador: id })
+  HistoricoPedidosModel.find({ name_entregador: id })
     .sort({ _id: -1 })
     .populate("name_entregador")
     .populate("name_empresa")
