@@ -7,16 +7,15 @@ import AuthUser from '../Middlewares/autenticacao.user.middlewares.js'
 const UserRoute = express.Router();
 
 UserRoute.post("/", User.create_User_Controller);
-UserRoute.get("/", User.FindAllUsers_Controller);
+UserRoute.get("/All", User.FindAllUsers_Controller);
 UserRoute.get(
   "/:id?",
   AuthUser.autenticacaoMiddlwareUser,
   User.FindUserId_Controller
 );
 UserRoute.patch(
-  "/:id",
-  global.validId,
-  global.validUser,
+  "/:id?",
+  AuthUser.autenticacaoMiddlwareUser,
   User.UpdateUser_Controller
 );
 

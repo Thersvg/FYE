@@ -90,7 +90,7 @@ const UpdateUser_Controller = async (req, res) => {
       res.status(400).send({ message: "Altere pelo menos um dado" });
     }
 
-    const id = req.id;
+    const id = req.entregadorId;
 
     await UserService.UpdateUser_Controller(
       id,
