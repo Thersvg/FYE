@@ -61,7 +61,7 @@ const FindAllUsers_Controller = async (req, res) => {
 
 const FindUserId_Controller = async (req, res) => {
   try {
-    const user = req.user;
+    const user = req.userEntregador;
     res.send(user);
   } catch (err) {
     res.status(500).send({ message: err.message });

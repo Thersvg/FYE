@@ -2,14 +2,15 @@ import express from "express";
 import global from "../Middlewares/global.middlewares.js";
 import User from "../Controller/user.controller.js";
 
+import AuthUser from '../Middlewares/autenticacao.user.middlewares.js'
+
 const UserRoute = express.Router();
 
 UserRoute.post("/", User.create_User_Controller);
 UserRoute.get("/", User.FindAllUsers_Controller);
 UserRoute.get(
-  "/:id",
-  global.validId,
-  global.validUser,
+  "/:id?",
+  AuthUser.autenticacaoMiddlwareUser,
   User.FindUserId_Controller
 );
 UserRoute.patch(
