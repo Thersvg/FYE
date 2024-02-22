@@ -47,7 +47,7 @@ const AllPedidosController = async (req, res) => {
   const pedidos = await PedidosService.AllPedidosService();
 
   if (pedidos.length === 0) {
-    return res.status(400).send({ message: "Não há pedidos cadastrados" });
+    return res.send('');
   }
 
   res.send(pedidos);
