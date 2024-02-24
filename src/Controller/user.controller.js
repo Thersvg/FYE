@@ -176,7 +176,7 @@ const RecoverUserController = async (req, res) => {
       password_entregador = Senha,
       email_entregador
     );
-    res.status(200).send({ message: "Senha atualizada com sucesso" });
+    res.status(200).send("Senha atualizada com sucesso");
   } catch (err) {
     res.status(500).send({ message: err.message });
   }
