@@ -1,4 +1,5 @@
 import UserService from "../Services/user.service.js";
+import nodemailer from 'nodemailer';
 import bcrypt from "bcrypt";
 
 const create_User_Controller = async (req, res) => {
