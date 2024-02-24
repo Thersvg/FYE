@@ -85,7 +85,7 @@ const AllPedidosAceitosController = async (req, res) => {
     }
     res.send({ pedidosAceitos });
   } catch (err) {
-    res.status(500).send({ message: err.message });
+    res.status(500).send("Falha ao buscar entregas aceitas");
   }
 };
 
@@ -101,7 +101,7 @@ const PedidoAceitoEntregador = async (req, res) => {
     res.status(200).send(PedidoAceito);
 
   } catch (err) {
-    res.status(500).send({ message: err.message });
+    res.status(500).send("Falha ao buscar entregas aceitas");
   }
 };
 
@@ -110,7 +110,7 @@ const SelecionarPedidosPorEmpresaId = async (req, res) => {
     const empresa = req.empresa;
     res.send(empresa);
   } catch (err) {
-    res.status(500).send({ message: err.message });
+    res.status(500).send("Falha ao buscar entregas aceitas");
   }
 };
 

@@ -23,7 +23,7 @@ const CreatePedidosController = async (req, res) => {
       !forma_pagamento ||
       !taxa_entrega
     ) {
-      return res.send({ message: "Preencha todos os campos corretamente!" });
+      return res.send("Preencha todos os campos corretamente!");
     }
     await PedidosService.CreatePedidosService({
       codigo_pedido,
@@ -37,9 +37,9 @@ const CreatePedidosController = async (req, res) => {
       name_empresa: req.empresaId,
     });
 
-    res.status(200).send({ message: "Pedido criado com sucesso!" });
+    res.status(200).send("Pedido criado com sucesso!");
   } catch (err) {
-    res.status(500).send({ message: err.message });
+    res.status(500).send("Falha ao criar entrega");
   }
 };
 
@@ -58,7 +58,7 @@ const FindPedidoById = async (req, res) => {
   const pedidos = await PedidosService.FindPedidoByIdService(id);
 
   if (!pedidos) {
-    return res.send({ message: "Não há pedidos disponíveis" });
+    return res.send("Não há entregas disponíveis");
   }
   res.send(pedidos);
 };
@@ -68,7 +68,7 @@ const DeletePedido = async (req, res) => {
     const id = req.params.id;
     const DeletePedidoId = await PedidosService.deleteByIdService(id);
 
-    res.send({ message: "Pedido excluido com sucesso!" });
+    res.send("Entrega excluida com sucesso!");
   } catch (err) {
     res.status(500).send({ message: err.message });
   }

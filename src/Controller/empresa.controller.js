@@ -30,14 +30,14 @@ const CreateEmpresaController = async (req, res) => {
     ) {
       return res
         .status(400)
-        .send({ message: "Preencha todos os campos corretamente" });
+        .send("Preencha todos os campos corretamente");
     }
 
     const Empresa = await EmpresaService.createEmpresaService(req.body);
     const token = authEmpresa.GeradorDeToken(Empresa._id);
 
     if (!Empresa) {
-      return res.status(400).send({ message: "Erro na criação da empresa" });
+      return res.status(400).send("Erro na criação da conta");
     }
     
     res.status(201).send({
@@ -58,7 +58,7 @@ const CreateEmpresaController = async (req, res) => {
       },
     });
   } catch (err) {
-    res.status(500).send({ message: "Erro ao criar conta" });
+    res.status(500).send("Falha na criação da conta");
   }
 };
 
@@ -67,26 +67,20 @@ const FindAllEmpresaController = async (req, res) => {
     const empresas = await EmpresaService.findAllEmpresaService();
 
     if (empresas.length === 0) {
-      return res.send({ message: "Nenhuma empresa cadastrada" });
+      return res.send("Nenhuma empresa cadastrada");
     }
     res.send(empresas);
   } catch (err) {
-    res.status(500).send({ message: err.message });
+    res.status(500).send("Falha ao buscar empresa");
   }
 };
 
 const FindIdEmpresaController = async (req, res) => {
   try {
-    /*     const empresa = req.empresa; */
-
     const empresa = req.empresaAutenticada;
-
-    /*     req.empresaId = empresa.id;
-    req.empresaAutenticada = empresa; */
-
     res.send(empresa);
   } catch (err) {
-    res.status(500).send({ message: err.message });
+    res.status(500).send("Falha ao buscar empresa");
   }
 };
 
@@ -116,10 +110,9 @@ const UpdateEmpresaController = async (req, res) => {
       !taxa_entrega_empresa &&
       !cidade_empresa
     ) {
-      res.status(400).send({ message: "Atualize algum dado"});
+      res.status(400).send("Atualize algum dado");
     } 
 
-    /*     const id = req.id; */
     const id = req.empresaId;
     
     await EmpresaService.updateEmpresaService(
@@ -134,9 +127,9 @@ const UpdateEmpresaController = async (req, res) => {
       cidade_empresa,
       id
     );
-    res.status(200).send({ message: "Dados atualizados com sucesso" });
+    res.status(200).send("Dados atualizados com sucesso");
   } catch (err) {
-    res.status(500).send({ message: err.message });
+    res.status(500).send("Falha ao atualizar os dados");
   }
 };
 
@@ -153,9 +146,9 @@ const RecoverEmpresaController = async (req, res) => {
       password_empresa =  Senha,
       email_empresa
     );
-    res.status(200).send({ message: "Senha atualizada com sucesso" });
+    res.status(200).send("Senha atualizada com sucesso");
   } catch (err) {
-    res.status(500).send({ message: err.message });
+    res.status(500).send("Falha ao atualizar senha");
   }
 };
 
@@ -164,9 +157,9 @@ const DeleteEmpresa = async (req, res) => {
     const id = req.params.id;
     const DeleteEmpresaId = await EmpresaService.deleteByIdService(id);
 
-    res.send({ message: "Empresa excluida com sucesso!" });
+    res.send("Conta excluida com sucesso!");
   } catch (err) {
-    res.status(500).send({ message: err.message });
+    res.status(500).send("Falha ao exluir conta");
   }
 };
 

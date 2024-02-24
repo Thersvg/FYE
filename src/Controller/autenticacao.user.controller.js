@@ -19,7 +19,7 @@ const autenticacaoUserControllerLogin = async (req, res) => {
 
     res.status(200).send({ token });
   } catch (err) {
-    res.status(500).send({ message: err });
+    res.status(500).send("Falha na autênticação");
   }
 };
 

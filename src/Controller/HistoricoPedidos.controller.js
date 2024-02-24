@@ -43,7 +43,7 @@ const PedidoEntregue = async (req, res) => {
     await PedidosGerais.DeletePedidoAceitoByIdDoPedido(pedidoID);
     res.status(200).send(PedidoDB);
   } catch (err) {
-    res.status(500).send({ message: err.message });
+    res.status(500).send("Falha ao enviar entrega para histórico de entregas");
   }
 };
 
@@ -54,7 +54,7 @@ const HistoricoCompletoDePedidosEntregues = async (req, res) => {
       await HistoricoPedidosService.FindPedidosHistoricoById(id);
     res.send(AllPedidosEntregues);
   } catch (err) {
-    res.status(500).send({ message: err.message });
+    res.status(500).send("Falha ao buscar histórico de entregas");
   }
 };
 
@@ -66,7 +66,7 @@ const HistoricoCompletoDePedidosEntreguesEntregador = async (req, res) => {
     res.status(200).send(AllPedidosEntregues);
 
   } catch (err) {
-    res.status(500).send({ message: err.message });
+    res.status(500).send("Falha ao buscar histórico de entregas");
   }
 };
 
@@ -76,7 +76,7 @@ const DeleteOrderById = async (req, res) => {
     await HistoricoPedidosService.DeletePedidoHistorico(id);
     res.status(200).send("Entrega excluída com sucesso");
   } catch (error) {
-    res.status(500).send({ message: error.message });
+    res.status(500).send("Falha ao excluir entrega");
     throw error;
   }
 };

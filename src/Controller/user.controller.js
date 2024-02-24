@@ -67,7 +67,7 @@ const FindUserId_Controller = async (req, res) => {
     const user = req.userEntregador;
     res.send(user);
   } catch (err) {
-    res.status(500).send({ message: err.message });
+    res.status(500).send("Falha ao buscar usuário");
   }
 };
 

@@ -26,7 +26,7 @@ const autenticacaoMiddlwareUser = (req, res, next) => {
     jwt.verify(token, process.env.SECRET_KEY_JWT, async (error, decoded) => {
 
       if (error) {
-        return res.status(401).send("Token Inválido 1");
+        return res.status(401).send("Token Inválido");
       }
 
       const user = await UserService.findByIdService(decoded.id);
@@ -41,7 +41,7 @@ const autenticacaoMiddlwareUser = (req, res, next) => {
       next();
     });
   } catch (err) {
-    res.status(500).send({ message: err.message });
+    res.status(500).send("Falha ao iniciar sessão");
   }
 };
 

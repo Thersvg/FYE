@@ -13,18 +13,18 @@ const autenticacaoControllerLogin = async (req, res) => {
     );
 
     if (!passwordIsValid) {
-      return res.status(404).send({ message: "Email ou senha inválidos" });
+      return res.status(404).send("Email ou senha inválidos");
     }
 
     if (!empresa) {
-      return res.status(404).send({ message: "Email ou senha inválidos" });
+      return res.status(404).send("Email ou senha inválidos");
     }
 
     const token = AutenticacaoService.GeradorDeToken(empresa.id);
 
     return res.send(token);
   } catch (err) {
-    res.status(500).send({ message: "Email ou senha inválidos" });
+    res.status(500).send("Falha na autênticação");
   }
 };
 
