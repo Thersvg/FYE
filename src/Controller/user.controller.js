@@ -1,4 +1,5 @@
 import UserService from "../Services/user.service.js";
+import bcrypt from "bcrypt";
 
 const create_User_Controller = async (req, res) => {
   try {
@@ -107,9 +108,83 @@ const UpdateUser_Controller = async (req, res) => {
   }
 };
 
+const SendEmailUser = async (req,res) =>{
+  try{
+    const {
+      email_empresa,
+    } = req.body;
+
+    const transporter = nodemailer.createTransport({
+      service: "gmail",
+      auth: {
+        user: 'rodrigo17ifmt@gmail.com',
+        pass: 'xudm bldd uauf wjvv',
+      },
+    });
+
+    const caracteresPermitidos =
+    "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
+    let resultado = "";
+
+    for (let i = 0; i < 6; i++) {
+      const indiceAleatorio = Math.floor(
+        Math.random() * caracteresPermitidos.length
+      );
+      resultado += caracteresPermitidos.charAt(indiceAleatorio);
+    }
+  
+    const mailOptions = {
+      from: 'rodrigo17ifmt@gmail.com',
+      to: `${email_empresa}`,
+      subject: 'Reset your Password',
+      text: 'Reset your Password',
+      html: `<p>Your Code ${resultado}</p>`,
+    };
+
+    const response = await UserService.FindUserEmailService(email_empresa);
+
+    if(response){
+      await transporter.sendMail(mailOptions, (error, info) => {
+
+        if (error) {
+          return console.error(error);
+        }
+        res.status(200).send(resultado);
+      });   
+    }else{
+      res.status(404).send({message: "Email inválido"});
+    }
+  
+  }catch (error){
+    res.status(500).send({message: 'Algo deu errado' + error});
+  }
+
+}
+
+const RecoverUserController = async (req, res) => {
+  try {
+    let {
+      password_entregador,
+      email_entregador
+    } = req.body;
+
+    const Senha = await bcrypt.hash(password_entregador, 10);
+  
+    await EmpresaService.updatePasswordEmpresaService(
+      password_entregador =  Senha,
+      email_entregador
+    );
+    res.status(200).send({ message: "Senha atualizada com sucesso" });
+  } catch (err) {
+    res.status(500).send({ message: err.message });
+  }
+};
+
 export default {
   create_User_Controller,
   FindAllUsers_Controller,
   FindUserId_Controller,
   UpdateUser_Controller,
+  SendEmailUser,
+  RecoverUserController,
 };

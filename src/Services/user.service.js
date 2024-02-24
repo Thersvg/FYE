@@ -6,6 +6,8 @@ const findAllUserService = () => User.find();
 
 const findByIdService = (id) => User.findById(id);
 
+const FindUserEmailService = (email) => User.findOne({email_entregador:email});
+
 const UpdateUser_Controller = (
   id,
   name_entregador,
@@ -32,4 +34,5 @@ export default {
   findAllUserService,
   findByIdService,
   UpdateUser_Controller,
+  FindUserEmailService,
 };
