@@ -112,7 +112,7 @@ const UpdateUser_Controller = async (req, res) => {
 const SendEmailUser = async (req,res) =>{
   try{
     const {
-      email_empresa,
+      email_entregador,
     } = req.body;
 
     const transporter = nodemailer.createTransport({
@@ -136,13 +136,13 @@ const SendEmailUser = async (req,res) =>{
   
     const mailOptions = {
       from: 'rodrigo17ifmt@gmail.com',
-      to: `${email_empresa}`,
+      to: `${email_entregador}`,
       subject: 'Reset your Password',
       text: 'Reset your Password',
       html: `<p>Your Code ${resultado}</p>`,
     };
 
-    const response = await UserService.FindUserEmailService(email_empresa);
+    const response = await UserService.FindUserEmailService(email_entregador);
 
     if(response){
       await transporter.sendMail(mailOptions, (error, info) => {
