@@ -33,7 +33,7 @@ const UpdatePasswordUserService = (
     password_entregador,
     email_entregador
   ) =>
-    Empresa.findOneAndUpdate(
+    User.findOneAndUpdate(
       { email_entregador: email_entregador },
       {
         password_entregador

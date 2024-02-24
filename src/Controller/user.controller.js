@@ -22,13 +22,13 @@ const create_User_Controller = async (req, res) => {
       !email_entregador ||
       !formaDepagamento_entregador
     ) {
-      res.status(400).send({ message: "Preencha todos os campos" });
+      res.status(400).send("Preencha todos os campos");
     }
 
     const user = await UserService.createUserService(req.body);
 
     if (!user) {
-      return res.status(400).send({ message: "Erro na criação do usuário" });
+      return res.status(400).send("Erro na criação do usuário");
     }
 
     res.status(201).send({
@@ -44,7 +44,7 @@ const create_User_Controller = async (req, res) => {
       },
     });
   } catch (err) {
-    res.status(500).send({ message: err.message });
+    res.status(500).send("Falha ao criar usuário");
   }
 };
 
@@ -53,12 +53,12 @@ const FindAllUsers_Controller = async (req, res) => {
     const users = await UserService.findAllUserService();
 
     if (users.length === 0) {
-      return res.status(400).send({ message: "Não há usuários cadastrados" });
+      return res.status(400).send("Não há usuários cadastrados");
     }
 
     res.send(users);
   } catch (err) {
-    res.status(500).send({ message: err.message });
+    res.status(500).send("Falha ao buscar usuários cadastrados");
   }
 };
 
@@ -90,7 +90,7 @@ const UpdateUser_Controller = async (req, res) => {
       !email_entregador &&
       !formaDepagamento_entregador
     ) {
-      res.status(400).send({ message: "Altere pelo menos um dado" });
+      res.status(400).send("Altere pelo menos um dado");
     }
 
     const id = req.entregadorId;
@@ -104,9 +104,9 @@ const UpdateUser_Controller = async (req, res) => {
       email_entregador,
       formaDepagamento_entregador
     );
-    res.status(200).send({ message: "Dados atualizados com sucesso" });
+    res.status(200).send("Dados atualizados com sucesso");
   } catch (err) {
-    res.status(500).send({ message: err.message });
+    res.status(500).send("Erro ao atualizar dados");
   }
 };
 
@@ -154,11 +154,11 @@ const SendEmailUser = async (req,res) =>{
         res.status(200).send(resultado);
       });   
     }else{
-      res.status(404).send({message: "Email inválido"});
+      res.status(404).send("Email inválido");
     }
   
   }catch (error){
-    res.status(500).send({message: 'Algo deu errado' + error});
+    res.status(500).send('Erro ao enviar código');
   }
 
 }
@@ -178,7 +178,7 @@ const RecoverUserController = async (req, res) => {
     );
     res.status(200).send("Senha atualizada com sucesso");
   } catch (err) {
-    res.status(500).send({ message: err.message });
+    res.status(500).send("Falha na atualização");
   }
 };
 
