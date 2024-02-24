@@ -8,7 +8,7 @@ const PedidoEntregue = async (req, res) => {
     const PedidoDB = req.empresa;
 
     if (!PedidoDB) {
-      res.send({ message: "Não foi possivel encontrar o pedido desse ID" });
+      res.send("Não há entregas");
     }
 
     const {
@@ -74,7 +74,7 @@ const DeleteOrderById = async (req, res) => {
   try {
     const id = req.id;
     await HistoricoPedidosService.DeletePedidoHistorico(id);
-    res.status(200).send({ message: "Pedido Finalizado" });
+    res.status(200).send("Entrega excluída com sucesso");
   } catch (error) {
     res.status(500).send({ message: error.message });
     throw error;

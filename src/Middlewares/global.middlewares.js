@@ -9,7 +9,7 @@ const validId = (req, res, next) => {
 
     if (!mongoose.Types.ObjectId.isValid(id)) {
       console.log(id);
-      return res.status(400).send({ message: "ID inválido" });
+      return res.status(400).send("ID inválido" );
     }
     req.id = id;
     next();
@@ -24,7 +24,7 @@ const validUser = async (req, res, next) => {
     const user = await UserService.findByIdService(id);
 
     if (!user) {
-      return res.status(400).send({ message: "Usuário não encontrado" });
+      return res.status(400).send("Usuário não encontrado");
     }
     (req.id = id), (req.user = user);
     next();
@@ -45,7 +45,7 @@ const validEmpresa = async (req, res, next) => {
     const Empresa = await EmpresaService.findIdEmpresaService(id);
 
     if (!Empresa) {
-      return res.status(400).send({ message: "Empresa não encontrada" });
+      return res.status(400).send("Empresa não encontrada");
     }
 
     (req.id = id), (req.empresa = Empresa);
@@ -65,7 +65,7 @@ const BuscaEmpresaEPedido = async (req, res, next) => {
     if (!EmpresaEpedido) {
       return res
         .status(400)
-        .send({ message: "Pedido e Empresa não encontrada" });
+        .send("Pedido e Empresa não encontrada");
     }
 
     req.id = id;
@@ -88,7 +88,7 @@ const BuscaEmpresaEPedidoParaHistorico = async (req, res, next) => {
     if (!EmpresaEpedido) {
       return res
         .status(400)
-        .send({ message: "Pedido e Empresa não encontrada" });
+        .send("Pedido e Empresa não encontrada");
     }
 
     req.id = id;

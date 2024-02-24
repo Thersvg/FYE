@@ -8,11 +8,11 @@ const autenticacaoUserControllerLogin = async (req, res) => {
     const passwordIsValid = bcrypt.compareSync(password_entregador, user.password_entregador);
 
     if (!passwordIsValid) {
-      return res.status(404).send({ message: "Email ou senha inválidos" });
+      return res.status(404).send("Email ou senha inválidos");
     }
 
     if (!user) {
-      return res.status(404).send({ message: "Email ou senha inválidos" });
+      return res.status(404).send("Email ou senha inválidos");
     }
 
     const token = AutenticacaoUserService.GeradorDeToken(user.id);

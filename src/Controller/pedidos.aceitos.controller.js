@@ -12,7 +12,7 @@ const CreatePedidosController = async (req, res, next) => {
     const PedidoDB = await PedidosCriadosService.findByIdService(pedidoID);
 
     if (PedidoDB.length === 0) {
-      res.send({ message: "Não foi possivel encontrar o pedido desse ID" });
+      res.send("Não há entregas");
     }
 
     const EntregadorID = req.entregadorId;
@@ -70,9 +70,9 @@ const CreatePedidosController = async (req, res, next) => {
 
     await PedidosCriadosService.deleteByIdService(pedidoID);
 
-    res.status(200).send({ message: "Pedido aceito com sucesso!" });
+    res.status(200).send("Entrega aceita com sucesso!");
   } catch (err) {
-    res.status(500).send({ message: err.message });
+    res.status(500).send("Falha ao aceitar");
   }
 };
 
@@ -81,7 +81,7 @@ const AllPedidosAceitosController = async (req, res) => {
     const pedidosAceitos = await PedidosAceptService.AllPedidosAceitosService();
 
     if (pedidosAceitos.length === 0) {
-      return res.status(400).send({ message: "Não há pedidos aceitos" });
+      return res.status(400).send("Não há entregas aceitas");
     }
     res.send({ pedidosAceitos });
   } catch (err) {
