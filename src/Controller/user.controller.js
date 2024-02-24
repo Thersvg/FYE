@@ -1,6 +1,7 @@
 import UserService from "../Services/user.service.js";
 import nodemailer from 'nodemailer';
 import bcrypt from "bcrypt";
+import User from "../Model/User.model.js";
 
 const create_User_Controller = async (req, res) => {
   try {
@@ -171,8 +172,8 @@ const RecoverUserController = async (req, res) => {
 
     const Senha = await bcrypt.hash(password_entregador, 10);
   
-    await EmpresaService.updatePasswordEmpresaService(
-      password_entregador =  Senha,
+    await UserService.UpdatePasswordUserService(
+      password_entregador = Senha,
       email_entregador
     );
     res.status(200).send({ message: "Senha atualizada com sucesso" });

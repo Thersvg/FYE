@@ -29,10 +29,22 @@ const UpdateUser_Controller = (
     }
   );
 
+const UpdatePasswordUserService = (
+    password_entregador,
+    email_entregador
+  ) =>
+    Empresa.findOneAndUpdate(
+      { email_entregador: email_entregador },
+      {
+        password_entregador
+      }
+    );
+
 export default {
   createUserService,
   findAllUserService,
   findByIdService,
   UpdateUser_Controller,
   FindUserEmailService,
+  UpdatePasswordUserService,
 };

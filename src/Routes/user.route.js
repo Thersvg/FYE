@@ -21,7 +21,7 @@ UserRoute.patch(
 );
 
 UserRoute.put(
-  "/recover/:id?",
+  "/recover/",
   User.RecoverUserController
 );
 
