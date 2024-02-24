@@ -16,7 +16,7 @@ EmpresaRouter.get(
   EmpresaController.FindIdEmpresaController
 );
 
- EmpresaRouter.patch(
+EmpresaRouter.patch(
   "/:id?",
   auth.autenticacaoMiddlware,
   EmpresaController.UpdateEmpresaController

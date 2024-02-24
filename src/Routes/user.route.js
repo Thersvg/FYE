@@ -4,7 +4,6 @@ import User from "../Controller/user.controller.js";
 
 import AuthUser from '../Middlewares/autenticacao.user.middlewares.js'
 
-UserRoute.post("/enviar-email", User.SendEmailUser);
 
 const UserRoute = express.Router();
 
@@ -25,5 +24,7 @@ UserRoute.put(
   "/recover/:id?",
   User.RecoverUserController
 );
+
+UserRoute.post("/enviar-email", User.SendEmailUser);
 
 export default UserRoute;
