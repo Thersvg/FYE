@@ -58,7 +58,8 @@ const CreateEmpresaController = async (req, res) => {
       },
     });
   } catch (err) {
-    res.status(500).send("Falha na criação da conta");
+    res.status(500).send(err.message);
+    //"Falha na criação da conta"
   }
 };
 
