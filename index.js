@@ -15,6 +15,8 @@ import PedidosAceitosParaEmpresas from "./src/Routes/pedidos.aceitos.route.js";
 
 import HistoricoPedidos from "./src/Routes/historico.pedidos.route.js";
 
+import BackupOrderRouter from "./src/Routes/backupOrder.route.js";
+
 import ConnectMongoDB from "./src/Database/db.js";
 import dotenv from "dotenv";
 
@@ -48,5 +50,7 @@ app.use("/aceitar-pedido-user", PedidosAceitosRouter);
 app.use("/pedidos-aceito", PedidosAceitosParaEmpresas);
 
 app.use("/historico-pedido", HistoricoPedidos);
+
+app.use("/order-to-backup", BackupOrderRouter);
 
 app.listen(4000, () => console.log(`Servidor rodando na porta ${port}`));

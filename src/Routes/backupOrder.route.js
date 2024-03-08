@@ -3,11 +3,13 @@ import { Router } from "express";
 const BackupOrderRouter = Router();
 
 import auth from "../Middlewares/global.middlewares.js";
-import HistoricoPedidosController from "../Controller/HistoricoPedidos.controller.js";
+import BackupOrderController from "../Controller/BackupOrder.controller.js";
 
-PedidosHstoricoRouter.post(
+BackupOrderRouter.post(
   "/:id?",
   auth.validId,
   auth.FindOrderHistoricToBackup,
-  HistoricoPedidosController.PedidoEntregue
+  BackupOrderController.OrderToBackup
 );
+
+export default BackupOrderRouter;
