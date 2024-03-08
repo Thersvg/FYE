@@ -22,10 +22,19 @@ const FindPedidoHistoricoIDPedido = (id) =>
 const DeletePedidoHistorico = (id) =>
   HistoricoPedidosModel.deleteOne({ _id: id });
 
+const FindOrderHistoric = (id) =>
+   HistoricoPedidosModel.findOne({ _id: id })
+  .sort({ _id: -1 })
+  .populate("name_entregador")
+  .populate("name_empresa")
+  .populate("detalhes_pedido");
+
+
 export default {
   CreatePedidosHistoricoService,
   FindPedidosHistoricoById,
   FindPedidoHistoricoIDPedido,
   FindPedidosHistoricoByIdEntregador,
   DeletePedidoHistorico,
+  FindOrderHistoric,
 };

@@ -2,6 +2,7 @@ import mongoose from "mongoose";
 import UserService from "../Services/user.service.js";
 import EmpresaService from "../Services/empresa.service.js";
 import PedidosGerais from "../Services/pedidos.aceitos.service.js";
+import PedidosHistorico from "../Services/historico.pedidos.service.js"
 
 const validId = (req, res, next) => {
   try {
@@ -100,6 +101,28 @@ const BuscaEmpresaEPedidoParaHistorico = async (req, res, next) => {
   }
 };
 
+
+const FindOrderHistoricToBackup = async (req, res, next) =>{
+  try {
+    const id = req.id;
+
+    const EmpresaEpedido = await PedidosHistorico.FindOrderHistoric(id);
+
+    if (!EmpresaEpedido) {
+      return res
+        .status(400)
+        .send("Pedido e Empresa não encontrada");
+    }
+
+    req.id = id;
+    req.empresa = EmpresaEpedido;
+
+    next();
+  } catch (err) {
+    res.status(500).send({ message: err.message });
+  }
+}
+
 const BuscaEdeletaPedidoAceito = async (req, res, next) => {
   try {
     const id = req.id;
@@ -118,4 +141,5 @@ export default {
   BuscaEmpresaEPedido,
   BuscaEdeletaPedidoAceito,
   BuscaEmpresaEPedidoParaHistorico,
+  FindOrderHistoricToBackup,
 };

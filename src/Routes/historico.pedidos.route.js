@@ -12,6 +12,7 @@ PedidosHstoricoRouter.post(
   auth.BuscaEmpresaEPedidoParaHistorico,
   HistoricoPedidosController.PedidoEntregue
 );
+
 PedidosHstoricoRouter.get(
   "/empresa/:id?",
   authEmpresa.autenticacaoMiddlware,
