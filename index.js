@@ -24,17 +24,18 @@ import swaggerRoute from "./src/Routes/swagger.route.js";
 
 dotenv.config();
 
-app.use(express.json({ limit: '5mb' }));
-app.use(express.urlencoded({ limit: '5mb', extended: true }));
-
-app.use(cors());
-
 const app = express();
 const port = process.env.PORT || 4000;
 
 let dbName = 'DB_FOR_YOU_ENTREGAS'; 
 
+app.use(express.json({ limit: '5mb' }));
+app.use(express.urlencoded({ limit: '5mb', extended: true }));
+
+app.use(cors());
+
 ConnectMongoDB(dbName);
+
 app.use(express.json());
 
 app.use("/documentation", swaggerRoute);
