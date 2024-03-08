@@ -24,7 +24,7 @@ const BackupOrderSchema = new mongoose.Schema({
 });
 
 const BackupOrders = mongoose.model(
-  "HistoricoPedidos",
+  "BackupOrders",
   BackupOrderSchema
 );
 

@@ -1,4 +1,4 @@
-import backupOrderService from "../Services/backupOrder.service";
+import backupOrderService from "../Services/backupOrder.service.js";
 import PedidoHistorico from "../Services/historico.pedidos.service.js"
 
 const OrderToBackup = async (req, res) => {
