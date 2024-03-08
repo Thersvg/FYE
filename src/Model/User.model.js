@@ -6,7 +6,7 @@ const UserSchema = new mongoose.Schema({
   cpf_entregador: { type: String, require: true },
   password_entregador: { type: String, require: true, select: false },
   telefone_entregador: { type: String, require: true },
-  email_entregador: { type: String, require: true },
+  email_entregador: { type: String, require: true, unique: true },
   formaDepagamento_entregador: { type: String, require: true },
 });
 

@@ -3,9 +3,9 @@ import bcrypt from "bcrypt";
 
 const EmpresaSchema = new mongoose.Schema({
   name_empresa: { type: String, require: true },
-  cnpj_empresa: { type: String, require: true, unique: true },
+  cnpj_empresa: { type: String, require: true},
   password_empresa: { type: String, require: true, select: false },
-  email_empresa: { type: String, require: true },
+  email_empresa: { type: String, require: true, unique: true},
   endereco_empresa: { type: String },
   telefone_empresa: { type: String, require: true },
   logo_empresa: { type: String},
