@@ -119,8 +119,8 @@ const SendEmailUser = async (req,res) =>{
     const transporter = nodemailer.createTransport({
       service: "gmail",
       auth: {
-        user: 'rodrigo17ifmt@gmail.com',
-        pass: 'xudm bldd uauf wjvv',
+        user: 'foryouentregas@gmail.com',
+        pass: 'hukz jowy dxyh qruf',
       },
     });
 
@@ -136,11 +136,19 @@ const SendEmailUser = async (req,res) =>{
     }
   
     const mailOptions = {
-      from: 'rodrigo17ifmt@gmail.com',
+      from: 'foryouentregas@gmail.com',
       to: `${email_entregador}`,
-      subject: 'Reset your Password',
-      text: 'Reset your Password',
-      html: `<p>Your Code ${resultado}</p>`,
+      subject: 'Recuperação de senha',
+      text: 'Recuperação de senha',
+      html: `  
+      <h2>Código para recuperação</h2>
+      <p>Olá,</p>
+      <p>Recebemos uma solicitação para recuperar a sua senha. Utilize o código abaixo para realizar a recuperação:</p>
+      <h2>${resultado}</h2>
+      <p>Por favor, não responda esse e-mail.</p>
+      <p>Atenciosamente,</p>
+      <p>For you entregas</p>     
+      `,
     };
 
     const response = await UserService.FindUserEmailService(email_entregador);
