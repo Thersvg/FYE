@@ -34,7 +34,7 @@ const CreateEmpresaController = async (req, res) => {
     }
 
 
-    const VerifyEmailToCreate = await EmpresaService(email_empresa);
+    const VerifyEmailToCreate = await EmpresaService.FindEmailEmpresaService(email_empresa);
 
     if(VerifyEmailToCreate){
       return res.status(400).send("Email já existente");
