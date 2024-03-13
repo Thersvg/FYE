@@ -33,6 +33,13 @@ const CreateEmpresaController = async (req, res) => {
         .send("Preencha todos os campos corretamente");
     }
 
+
+    const VerifyEmailToCreate = await EmpresaService(email_empresa);
+
+    if(VerifyEmailToCreate){
+      return res.status(400).send("Email já existente");
+    }
+
     const Empresa = await EmpresaService.createEmpresaService(req.body);
     const token = authEmpresa.GeradorDeToken(Empresa._id);
 
