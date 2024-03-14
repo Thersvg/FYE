@@ -24,6 +24,12 @@ const create_User_Controller = async (req, res) => {
       res.status(400).send("Preencha todos os campos");
     }
 
+    const VerifyEmailToCreate = await UserService.FindUserEmailService(email_entregador);
+
+    if(VerifyEmailToCreate){
+      return res.status(400).send("E-mail já existente");
+    }
+
     const user = await UserService.createUserService(req.body);
 
     if (!user) {
