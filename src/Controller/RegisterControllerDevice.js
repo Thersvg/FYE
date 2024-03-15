@@ -34,8 +34,9 @@ const FindTokenStorageController = async (req, res) =>{
         if(response){
             res.status(200).send('Token encontrado com sucesso.');
         }
-        res.status(404).send('Token não encontrado');
-        
+
+        res.send('');
+
     }catch(error){
         res.status(500).send("Não foi possivel encontrar token");
     }
