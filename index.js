@@ -19,34 +19,22 @@ dotenv.config();
 const app = express();
 const port = process.env.PORT || 4000;
 
-let dbName = 'DB_FOR_YOU_ENTREGAS'; 
+ConnectMongoDB('DB_FOR_YOU_ENTREGAS');
 
 app.use(express.json({ limit: '10mb' }));
 app.use(express.urlencoded({ limit: '10mb', extended: true }));
-
 app.use(cors());
-
-ConnectMongoDB(dbName);
-
 app.use(express.json());
-
 app.use("/documentation", swaggerRoute);
-
 app.use("/user", UserRoute);
 app.use("/empresa", EmpresaRoute);
-
 app.use("/autenticacao-empresa", EmpresaAutenticacao);
 app.use("/autenticacao-user", UserAutenticacao);
-
 app.use("/pedido", CreatePedidosCreateViewAll);
-
 app.use("/aceitar-pedido-user", PedidosAceitosRouter);
 app.use("/pedidos-aceito", PedidosAceitosParaEmpresas);
-
 app.use("/historico-pedido", HistoricoPedidos);
-
 app.use("/order-to-backup", BackupOrderRouter);
-
 app.use("/register-device", Device);
 
 app.listen(4000, () => console.log(`Servidor rodando na porta ${port}`));
