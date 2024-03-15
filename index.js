@@ -1,26 +1,18 @@
 import express from "express";
-
 import cors from "cors";
-
 import UserRoute from "./src/Routes/user.route.js";
 import EmpresaRoute from "./src/Routes/empresa.route.js";
-
 import UserAutenticacao from "./src/Routes/autenticacao.user.route.js";
 import EmpresaAutenticacao from "./src/Routes/autenticacao.route.js";
-
 import CreatePedidosCreateViewAll from "./src/Routes/create.pedido.route.js";
-
 import PedidosAceitosRouter from "./src/Routes/pedidos.aceitos.route.js";
 import PedidosAceitosParaEmpresas from "./src/Routes/pedidos.aceitos.route.js";
-
 import HistoricoPedidos from "./src/Routes/historico.pedidos.route.js";
-
 import BackupOrderRouter from "./src/Routes/backupOrder.route.js";
-
 import ConnectMongoDB from "./src/Database/db.js";
 import dotenv from "dotenv";
-
 import swaggerRoute from "./src/Routes/swagger.route.js";
+import Device from "./src/Routes/RegisterRouteDevice.js";
 
 dotenv.config();
 
@@ -54,5 +46,7 @@ app.use("/pedidos-aceito", PedidosAceitosParaEmpresas);
 app.use("/historico-pedido", HistoricoPedidos);
 
 app.use("/order-to-backup", BackupOrderRouter);
+
+app.use("/register-device", Device);
 
 app.listen(4000, () => console.log(`Servidor rodando na porta ${port}`));
