@@ -5,6 +5,6 @@ import DeviceTokenController from '../Controller/RegisterControllerDevice.js'
 
 Device.post('/', DeviceTokenController.NotificationDeviceToken);
 
-Device.post('/find', DeviceTokenController.FindTokenStorageController);
+Device.get('/find/:token', DeviceTokenController.FindTokenStorageController);
 
 export default Device;

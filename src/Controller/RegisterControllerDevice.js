@@ -23,7 +23,7 @@ const NotificationDeviceToken = async (req, res) =>{
 const FindTokenStorageController = async (req, res) =>{
     try{
 
-        const {token} = req.body;
+        const token = req.query.token;
 
         if (!token) {
             res.status(400).send('Token não fornecido.');
