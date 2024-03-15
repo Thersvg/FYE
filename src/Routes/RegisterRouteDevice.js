@@ -1,8 +1,8 @@
 import { Router } from "express";
 const Device = Router();
 
-import DeviceController from "../Controller/RegisterControllerDevice";
+import DeviceTokenController from '../Controller/RegisterControllerDevice.js'
 
-Device.post('/', DeviceController.NotificationDeviceToken);
+Device.post('/', DeviceTokenController.NotificationDeviceToken);
 
 export default Device;

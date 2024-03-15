@@ -1,17 +1,20 @@
-
-let tokens = [];
+import DeviceTokensService from "../Services/DeviceTokens.service.js"
 
 const NotificationDeviceToken = async (req, res) =>{
-    const { token } = req.body;
+    try{
+        const { token } = req.body;
 
-    if (!token) {
-      return res.status(400).json('Token não fornecido.');
+        if (!token) {
+            res.status(400).send('Token não fornecido.');
+        }
+
+        await DeviceTokensService.CreateStorageTokenService(token);
+
+        res.status(200).send('Token registrado com sucesso.');
+    }catch (error){
+        res.status(400).send("Não foi possivel salvar o token no banco de dados");
     }
 
-    // Salve o token no banco de dados ou em outro local de armazenamento
-    tokens.push(token);
-
-    return res.status(200).json('Token registrado com sucesso.');
 }
 
 export default {NotificationDeviceToken};
