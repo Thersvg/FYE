@@ -25,7 +25,7 @@ const FindTokenStorageController = async (req, res) =>{
         const response = await DeviceTokensService.FindTokenServiceStorage();
 
         if(response.length === 0){
-            res.status(200).send('Nenhum token armazenado');
+            res.status(200).send('');
             return;
         }
 
