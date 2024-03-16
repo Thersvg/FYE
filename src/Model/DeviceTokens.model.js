@@ -1,7 +1,7 @@
 import mongoose from "mongoose";
 
 const DeviceTokensSchema = new mongoose.Schema({
-    token: { type: String, require: true }
+    token: { type: String, require: true, unique: true }
 });
 
 const TokensDevice = mongoose.model(

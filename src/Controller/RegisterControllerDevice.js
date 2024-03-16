@@ -22,21 +22,15 @@ const NotificationDeviceToken = async (req, res) =>{
 
 const FindTokenStorageController = async (req, res) =>{
     try{
+        const response = await DeviceTokensService.FindTokenServiceStorage();
 
-        const token = req.query.token;
-
-        if (!token) {
-            res.status(400).send('Token não fornecido.');
+        if(response.length === 0){
+            res.status(404).send('Nenhum token armazenado');
+            return;
         }
 
-        const response = await DeviceTokensService.FindTokenServiceStorage(token);
-
-        if(response){
-            res.status(200).send('Token encontrado com sucesso.');
-        }
-
-        res.send('');
-
+        res.status(200).send(response);
+        
     }catch(error){
         res.status(500).send("Não foi possivel encontrar token");
     }
