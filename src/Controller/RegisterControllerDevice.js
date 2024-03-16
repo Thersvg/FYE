@@ -21,7 +21,7 @@ const NotificationDeviceToken = async (req, res) =>{
 }
 
 const FindTokenStorageController = async (req, res) =>{
-    const token = req.query.token;
+    const token = req.params.token;
     try{
         const response = await DeviceTokensService.FindTokenServiceStorage(token);
 
