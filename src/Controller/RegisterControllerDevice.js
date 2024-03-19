@@ -42,7 +42,7 @@ const SendMessageToDevices = async (req, res) =>{
 
     const expo = new Expo();
 
-    const sendPushNotification = async (token, title, body) => {
+    const sendPushNotification = async (token, title, body, sound, icon) => {
         // Verifique se o token é válido
         if (!Expo.isExpoPushToken(token)) {
         console.error('Token de notificação push inválido:', token);
@@ -52,10 +52,11 @@ const SendMessageToDevices = async (req, res) =>{
         // Montar a mensagem
         const message = {
         to: token,
-        sound: 'default',
+        sound: sound || 'default',
         title: title,
         body: body,
         data: { anyData: 'aqui' }, // Dados adicionais que você deseja enviar com a notificação
+        icon: icon || 'icon', 
         };
     
         // Enviar a notificação
@@ -71,8 +72,10 @@ const SendMessageToDevices = async (req, res) =>{
         const token = 'ExponentPushToken[HSF7-XJ-5UuuwhbyLPeSZ1]';
         const title = 'Nova Entrega';
         const body = 'Uma nova entrega está disponível!';
+        const sound = '../assets/buzina.mp3';
+        const icon = '../assets/icon.png'; 
 
-        sendPushNotification(token, title, body);
+        sendPushNotification(token, title, body, sound, icon);
         return res.status(200).send('Notificação enviada com sucesso');
 
     }catch (error){
