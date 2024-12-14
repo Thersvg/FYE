@@ -1,6 +1,8 @@
 import PedidosService from "../Services/create.pedidos.service.js";
+import EmpresaService from "../Services/empresa.service.js";
 
 const CreatePedidosController = async (req, res) => {
+  const empresaverify = req.empresaAutenticada; 
   try {
     const {
       codigo_pedido,
@@ -25,6 +27,8 @@ const CreatePedidosController = async (req, res) => {
     ) {
       return res.send("Preencha todos os campos corretamente!");
     }
+
+    if(empresaverify.assinatura === 'yes'){
     await PedidosService.CreatePedidosService({
       codigo_pedido,
       name_cliente,
@@ -35,11 +39,13 @@ const CreatePedidosController = async (req, res) => {
       forma_pagamento,
       taxa_entrega,
       name_empresa: req.empresaId,
-    });
-
-    res.status(200).send("Pedido criado com sucesso!");
+      });
+      res.status(201).send("Pedido criado com sucesso!"); 
+    }else{
+      res.status(402).send("Sem assinatura");
+    }
   } catch (err) {
-    res.status(500).send("Falha ao criar entrega");
+    res.status(500).send("Falha");
   }
 };
 

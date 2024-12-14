@@ -12,7 +12,7 @@ import BackupOrderRouter from "./src/Routes/backupOrder.route.js";
 import ConnectMongoDB from "./src/Database/db.js";
 import dotenv from "dotenv";
 import swaggerRoute from "./src/Routes/swagger.route.js";
-import Device from "./src/Routes/RegisterRouteDevice.js";
+import AssinaturaRouter from "./src/Routes/assinatura.route.js";
 
 dotenv.config();
 
@@ -35,6 +35,6 @@ app.use("/aceitar-pedido-user", PedidosAceitosRouter);
 app.use("/pedidos-aceito", PedidosAceitosParaEmpresas);
 app.use("/historico-pedido", HistoricoPedidos);
 app.use("/order-to-backup", BackupOrderRouter);
-app.use("/register-device", Device);
+app.use("/plano", AssinaturaRouter)
 
 app.listen(4000, () => console.log(`Servidor rodando na porta ${port}`));

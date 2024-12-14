@@ -10,7 +10,8 @@ const EmpresaSchema = new mongoose.Schema({
   telefone_empresa: { type: String, require: true },
   logo_empresa: { type: String},
   taxa_entrega_empresa: { type: String },
-  cidade_empresa: { type: String, require: true }
+  cidade_empresa: { type: String, require: true },
+  assinatura: { type: String, require: true }
 });
 
 EmpresaSchema.pre("save", async function (next) {

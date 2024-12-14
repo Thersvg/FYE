@@ -15,6 +15,7 @@ const CreateEmpresaController = async (req, res) => {
       logo_empresa,
       taxa_entrega_empresa,
       cidade_empresa,
+      assinatura,
     } = req.body;
 
     if (
@@ -62,6 +63,7 @@ const CreateEmpresaController = async (req, res) => {
         logo_empresa,
         taxa_entrega_empresa,
         cidade_empresa,
+        assinatura,
       },
     });
   } catch (err) {
@@ -103,7 +105,8 @@ const UpdateEmpresaController = async (req, res) => {
       telefone_empresa,
       logo_empresa,
       taxa_entrega_empresa,
-      cidade_empresa
+      cidade_empresa,
+      assinatura
     } = req.body;
 
 
@@ -116,7 +119,8 @@ const UpdateEmpresaController = async (req, res) => {
       !telefone_empresa &&
       !logo_empresa &&
       !taxa_entrega_empresa &&
-      !cidade_empresa
+      !cidade_empresa &&
+      !assinatura
     ) {
       res.status(400).send("Atualize algum dado");
     } 
@@ -133,6 +137,7 @@ const UpdateEmpresaController = async (req, res) => {
       logo_empresa,
       taxa_entrega_empresa,
       cidade_empresa,
+      assinatura,
       id
     );
     res.status(200).send("Dados atualizados com sucesso");

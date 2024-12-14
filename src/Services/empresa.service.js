@@ -20,6 +20,7 @@ const updateEmpresaService = (
   logo_empresa,
   taxa_entrega_empresa,
   cidade_empresa,
+  assinatura,
   id
 ) =>
   Empresa.findOneAndUpdate(
@@ -33,7 +34,8 @@ const updateEmpresaService = (
       telefone_empresa,
       logo_empresa,
       taxa_entrega_empresa,
-      cidade_empresa
+      cidade_empresa,
+      assinatura
     }
   );
 
