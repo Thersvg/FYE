@@ -124,21 +124,36 @@ const Card = async(req,res) =>{
 
   const object = req.body;
 
-  console.log("Request body:", object);
+  const teste = {
+    transaction_amount: Number(object.transaction_amount),
+    token: object.token,
+    description: object.description,
+    installments: object.installments,
+    payment_method_id: object.payment_method_id,
+    issuer_id: Number(object.issuer_id),
+        payer: {
+        email: object.payer.email,
+        identification: {
+    type: object.payer.identification.type,
+    number: Number(object.payer.identification.number),
+  }}
+  }
+
+  console.log("Request body:", teste);
   
   payment.create({
       body: { 
-          transaction_amount: Number(object.transaction_amount),
-          token: Number(object.token),
-          description: object.description,
-          installments: object.installments,
-          payment_method_id: object.payment_method_id,
-          issuer_id: Number(object.issuer),
-              payer: {
-              email: object.payer.email,
-              identification: {
-          type: object.payer.identification.type,
-          number: Number(object.payer.identification.number),
+        transaction_amount: Number(object.transaction_amount),
+        token: object.token,
+        description: object.description,
+        installments: object.installments,
+        payment_method_id: object.payment_method_id,
+        issuer_id: Number(object.issuer_id),
+            payer: {
+            email: object.payer.email,
+            identification: {
+        type: object.payer.identification.type,
+        number: Number(object.payer.identification.number),
       }}},
       requestOptions: { idempotencyKey: `${Date.now()}-${Math.random()}` }
   })
