@@ -6,5 +6,6 @@ const AssinaturaRouter = Router();
 
 AssinaturaRouter.post("/criar", auth.autenticacaoMiddlware, CreatePlan.CreatePlan);
 AssinaturaRouter.post("/assinar", auth.autenticacaoMiddlware, CreatePlan.SubscribeToPlan);
+AssinaturaRouter.post("/card", auth.autenticacaoMiddlware, CreatePlan.Card);
 
 export default AssinaturaRouter;
