@@ -68,105 +68,132 @@ const CreatePlan = async (req, res) => {
 const SubscribeToPlan = async (req, res) => {
 
   async function FindID() {
-
     const response = await CreateStorageIDService.FindIDService();
     const firstObject = response[0];
     const planId = firstObject.PlanID;
     return planId;
   }
-  const responseID = await FindID();
-  console.log('ID do plano: ',responseID);
 
-  // Criar ou associar um cartão ao cliente
-  async function associateCardToCustomer(token, email) {
+// Função para verificar se o cliente já existe
+async function getCustomerByEmail(email) {
+  // Aqui, você pode tentar buscar o cliente usando o email (Se disponível)
+  const response = await fetch(`https://api.mercadopago.com/v1/customers/search?email=${email}`, {
+    method: 'GET',
+    headers: {
+      'Authorization': `Bearer ${process.env.MP_ACCESS_TOKEN}`, 
+    },
+  });
+
+  if (!response.ok) {
+    const error = await response.json();
+    throw new Error(`Erro ao verificar cliente: ${JSON.stringify(error)}`);
+  }
+
+  const customers = await response.json();
+  console.log('cliente: ',customers);
+  return customers.results.length > 0 ? customers.results[0] : null; 
+}
+
+// Função para criar ou obter um cliente
+async function createOrGetCustomer(email, token) {
+  
+  console.log('email',email, 'e token:' ,token)
+
+  let customer = await getCustomerByEmail(email); 
+
+  if (!customer) {
+    // Caso o cliente não exista, cria o cliente
     const customerResponse = await fetch('https://api.mercadopago.com/v1/customers', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
         'Authorization': `Bearer ${process.env.MP_ACCESS_TOKEN}`,
       },
-      body: JSON.stringify({
-        email: email, 
-      }),
+      body: JSON.stringify({ email: email }),
     });
 
+    if (!customerResponse.ok) {
+      const error = await customerResponse.json();
+      throw new Error(`Erro ao criar cliente: ${JSON.stringify(error)}`);
+    }
 
-  if (!customerResponse.ok) {
-    const error = await customerResponse.json();
-    throw new Error(`Erro ao criar cliente: ${JSON.stringify(error)}`);
+    customer = await customerResponse.json(); // Cria um novo cliente
   }
 
-  const customerData = await customerResponse.json();
-  const customerId = customerData.id;  // ID do cliente
-
-  console.log('Resultado da crição do Cartão: ',customerData,customerId);
-
-  // Associar o cartão ao cliente
-  const cardResponse = await fetch(`https://api.mercadopago.com/v1/customers/${customerId}/cards`, {
+  // Associar o cartão ao cliente (se necessário)
+  const cardResponse = await fetch(`https://api.mercadopago.com/v1/customers/${customer.id}/cards`, {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json',
       'Authorization': `Bearer ${process.env.MP_ACCESS_TOKEN}`,
     },
-    body: JSON.stringify({
-      token: token,  
-    }),
+    body: JSON.stringify({ token: token }),  // Token do cartão
   });
 
-    if (!cardResponse.ok) {
-      const error = await cardResponse.json();
-      throw new Error(`Erro ao adicionar cartão: ${JSON.stringify(error)}`);
-    }
-
-    const cardData = await cardResponse.json();
-
-    console.log('Resultado da associação do Cartão: ',cardData,customerId);
-
-    return { customerId, cardData };
+  if (!cardResponse.ok) {
+    const error = await cardResponse.json();
+    throw new Error(`Erro ao adicionar cartão: ${JSON.stringify(error)}`);
   }
 
-  // Criar a assinatura
-  async function createPreapproval(customerId, cardTokenId, payerEmail) {
-    const preapprovalData = {
-      preapproval_plan_id: responseID,
-      reason: "For You Entregas",
-      external_reference: "FYE-1234",
-      payer_email: payerEmail,   
-      card_token_id: cardTokenId,
-      back_url: "https://www.mercadopago.com.ar", 
-      status: "authorized",    
-    };
+  const cardData = await cardResponse.json(); // Cartão associado
+  return { customer, cardData };
+}
 
-    const response = await fetch('https://api.mercadopago.com/preapproval', {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-        'Authorization': `Bearer ${process.env.MP_ACCESS_TOKEN}`,
-      },
-      body: JSON.stringify(preapprovalData),
-    });
+// Função para criar a assinatura
+async function createPreapproval(customer, cardData,responseID) {
 
-    if (!response.ok) {
-      const error = await response.json();
-      throw new Error(`Erro ao criar assinatura: ${JSON.stringify(error)}`);
-    }
+  console.log('responseID - id do plano: ', responseID);
+  console.log('customerId - id do cliente:', customer.id);
+  console.log('email cliente:', customer.email);
+  console.log('ID do cartão:', cardData.id);
 
-    const data = await response.json();
-    return data;
+  console.log('cartão: ',cardData);
+  console.log('usuario: ',customer);
+
+  const preapprovalData = {
+    preapproval_plan_id: responseID,
+    reason: "For You Entregas",
+    external_reference: "FYE-1234",
+    payer_email: customer.email,
+    card_token_id: cardData.id,
+    back_url: "https://www.mercadopago.com.ar",
+    status: "authorized",
+  };
+
+  // Realiza a chamada para criar a assinatura
+  const response = await fetch('https://api.mercadopago.com/preapproval', {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json',
+      'Authorization': `Bearer ${process.env.MP_ACCESS_TOKEN}`,
+    },
+    body: JSON.stringify(preapprovalData),
+  });
+
+  if (!response.ok) {
+    const error = await response.json();
+    throw new Error(`Erro ao criar assinatura: ${JSON.stringify(error)}`);
   }
+
+  const data = await response.json();
+  return data;
+}
 
   const object = req.body;
   console.log('Objeto recebido: ',object);
 
-    try {
-      // 1: Associar o cartão ao cliente
-      console.log('emial do cliente antes da função: ',object.payer.email);
-      const { customerId, cardData } = await associateCardToCustomer(object.token, object.payer.email);
+  const responseID = await FindID();
+  console.log('ID do plano: ',responseID);
 
-      // 2: Criar a assinatura
-      const preapprovalData = await createPreapproval(customerId, cardData.id, object.payer.email);
+    try {     
+      // Passo 1: Criar ou obter o cliente
+      const { customer, cardData } = await createOrGetCustomer(object.payer.email, object.token);
+
+      // Passo 2: Criar a assinatura (preapproval)
+      const preapprovalData = await createPreapproval(customer, cardData, responseID);
       
       res.status(201).send(preapprovalData);
+
     } catch (error) {
       console.error(error);
       res.status(500).send(error.message || error);
